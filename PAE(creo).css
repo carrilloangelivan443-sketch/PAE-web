@@ -2559,10 +2559,52 @@ body::before {
         width: 220px !important;
     }
 }
-/* Eliminar por completo la foto y el degradado de fondo en la portada */
+/* =========================================================
+   CORRECCIÓN: ALTURA DE PORTADA SIN FOTO NI TELÉFONO
+========================================================= */
+
+/* 1. Apagar la foto de fondo por completo */
 .hero::after,
 :root[data-theme="dark"] .hero::after {
     display: none !important;
     content: none !important;
     background-image: none !important;
+}
+
+/* 2. Mantener la altura completa de pantalla en la portada para no empujar lo de abajo */
+.hero {
+    min-height: 100svh !important;
+    grid-template-columns: 1fr !important;
+    align-content: center !important;
+    justify-items: center !important;
+    text-align: center !important;
+    padding: 130px 32px 96px !important;
+}
+
+.hero-content {
+    max-width: 720px !important;
+    margin: 0 auto !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-title .title-line {
+    margin-inline: auto !important;
+}
+
+.hero-description {
+    max-width: 520px !important;
+    margin-inline: auto !important;
+}
+
+.hero-actions,
+.hero-note {
+    justify-content: center !important;
+}
+
+/* 3. Separación clara para la sección de Estudiantes y Docentes */
+.role-section {
+    padding-top: 110px !important;
+    padding-bottom: 110px !important;
 }
