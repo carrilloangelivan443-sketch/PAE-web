@@ -994,44 +994,7 @@
 
     </footer>
 
-    <!-- Control del botón de tema -->
-    <script>
-    (() => {
-        const root = document.documentElement;
-        const button = document.getElementById("themeToggle");
-        const meta = document.querySelector('meta[name="theme-color"]');
 
-        if (!button) return;
-
-        function updateTheme(theme) {
-            const dark = theme === "dark";
-            root.dataset.theme = dark ? "dark" : "light";
-            button.setAttribute("aria-pressed", String(dark));
-            button.setAttribute(
-                "aria-label",
-                dark ? "Activar modo claro" : "Activar modo oscuro"
-            );
-
-            if (meta) {
-                meta.content = dark ? "#0D0C0E" : "#6C1F2F";
-            }
-
-            try {
-                localStorage.setItem("pae-theme", dark ? "dark" : "light");
-            } catch (error) {
-                // Ignorar si localStorage está bloqueado
-            }
-        }
-
-        updateTheme(root.dataset.theme || "light");
-
-        button.addEventListener("click", () => {
-            const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
-            updateTheme(nextTheme);
-        });
-    })();
-    </script>
-
-</body>
+  </body>
 
 </html>

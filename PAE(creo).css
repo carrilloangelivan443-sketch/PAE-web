@@ -87,7 +87,6 @@
     --shadow-card: 0 1.25rem 3.4rem rgba(0, 0, 0, 0.35);
 }
 
-
 /* =========================================================
    02. ESCALA AUTOMÁTICA Y RESET GENERAL
 ========================================================= */
@@ -98,9 +97,9 @@
     box-sizing: border-box;
 }
 
-/* Escalado automático fluido según el ancho de pantalla */
+/* Escalado automático real en laptops y monitores grandes */
 html {
-    font-size: clamp(16px, 0.96vw, 22px);
+    font-size: clamp(16px, 1.18vw, 24px);
     scroll-behavior: smooth;
     scroll-padding-top: 7.2rem;
     background-color: var(--bg);
@@ -234,9 +233,9 @@ html::-webkit-scrollbar-thumb:hover {
     align-items: center;
     gap: clamp(1rem, 2vw, 2.2rem);
 
-    width: min(92vw, var(--max-width));
-    min-height: var(--nav-height);
-    padding: 0.75rem 1.65rem;
+    width: min(94vw, 110rem);
+    min-height: 5rem;
+    padding: 0.75rem 1.75rem;
 
     transform: translate3d(-50%, 0, 0);
 
@@ -267,7 +266,6 @@ html::-webkit-scrollbar-thumb:hover {
     pointer-events: none;
 }
 
-/* Logo */
 .brand {
     display: flex;
     align-items: center;
@@ -300,12 +298,11 @@ html::-webkit-scrollbar-thumb:hover {
     letter-spacing: -0.03em;
 }
 
-/* Enlaces */
 .nav-links {
     display: flex;
     align-items: center;
     justify-self: center;
-    gap: clamp(1.2rem, 2.2vw, 2.35rem);
+    gap: clamp(1.2rem, 2.2vw, 2.4rem);
     min-width: 0;
     white-space: nowrap;
 }
@@ -321,7 +318,6 @@ html::-webkit-scrollbar-thumb:hover {
     color: #FFFFFF;
 }
 
-/* Acciones */
 .nav-actions {
     display: flex;
     flex-direction: row;
@@ -377,7 +373,6 @@ html::-webkit-scrollbar-thumb:hover {
     color: #FFFFFF;
 }
 
-/* Selector de tema */
 .theme-toggle {
     display: grid;
     flex: 0 0 auto;
@@ -509,7 +504,7 @@ html::-webkit-scrollbar-thumb:hover {
 
 
 /* =========================================================
-   05. HERO / PRESENTACIÓN (PROPORCIÓN AUTOMÁTICA EN 2 LÍNEAS)
+   05. HERO / PRESENTACIÓN (TÍTULO EN BLANCO Y 2 LÍNEAS)
 ========================================================= */
 
 .hero {
@@ -517,20 +512,20 @@ html::-webkit-scrollbar-thumb:hover {
     isolation: isolate;
 
     display: grid;
-    grid-template-columns: minmax(0, 1.38fr) minmax(20rem, 0.62fr);
+    grid-template-columns: minmax(0, 1.45fr) minmax(20rem, 0.75fr);
     align-items: center;
-    gap: clamp(2rem, 3.5vw, 4.5rem);
+    gap: clamp(2rem, 3vw, 4rem);
 
-    width: min(92vw, var(--max-width));
+    width: min(94vw, 110rem);
     min-height: 100svh;
     margin: 0 auto;
-    padding: 8.5rem clamp(1rem, 2.5vw, 2.5rem) 5.5rem;
+    padding: 8.2rem clamp(0.75rem, 2vw, 2rem) 5.2rem;
 }
 
 .hero::after {
     content: "";
     position: absolute;
-    inset: auto -4vw 0;
+    inset: auto -3vw 0;
     z-index: 0;
     height: 56%;
     pointer-events: none;
@@ -603,24 +598,28 @@ html::-webkit-scrollbar-thumb:hover {
     max-width: none;
 }
 
-/* Tamaño en rem proporcional al contenedor: siempre queda en 2 líneas limpias */
 .hero h1 {
     margin: 1.35rem 0 0;
     color: var(--text);
-    font-size: clamp(3.1rem, 4.4vw, 4.75rem);
+    font-size: clamp(2.9rem, 4vw, 4.7rem);
     font-weight: 800;
-    line-height: 1.06;
+    line-height: 1.07;
     letter-spacing: -0.035em;
 }
 
+/* Mantener ambas líneas del título principal en blanco/texto base */
 .hero h1 span,
+.hero-title .title-line-first,
+.hero-title .title-line-second {
+    color: var(--text);
+}
+
 .section-heading h2 span,
 .role-content h2 span,
 .closing-content h2 span {
     color: var(--wine-light);
 }
 
-:root[data-theme="dark"] .hero h1 span,
 :root[data-theme="dark"] .section-heading h2 span,
 :root[data-theme="dark"] .role-content h2 span,
 :root[data-theme="dark"] .closing-content h2 span {
@@ -628,7 +627,7 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 .hero-description {
-    max-width: 36rem;
+    max-width: 38rem;
     margin: 1.65rem 0 0;
     color: var(--muted);
     font-size: 1.12rem;
@@ -661,17 +660,16 @@ html::-webkit-scrollbar-thumb:hover {
     box-shadow: 0 0 10px rgba(112, 183, 140, 0.40);
 }
 
-/* Teléfono Hero autoajustable */
 .hero-visual {
     display: flex;
-    min-height: 40rem;
+    min-height: 41rem;
     align-items: center;
     justify-content: center;
 }
 
 .visual-orbit {
     position: absolute;
-    width: 33rem;
+    width: 34rem;
     max-width: 100%;
     aspect-ratio: 1;
     border-radius: 50%;
@@ -694,7 +692,7 @@ html::-webkit-scrollbar-thumb:hover {
 .device {
     position: relative;
     z-index: 2;
-    width: 21.5rem;
+    width: 22.5rem;
     padding: 0.55rem;
     border: 1px solid rgba(255, 255, 255, 0.30);
     border-radius: 3.1rem;
