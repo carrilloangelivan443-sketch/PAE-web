@@ -2651,3 +2651,44 @@ body::before {
     margin-top: 32px !important;
     font-size: 13px !important;
 }
+
+/* ==========================================
+   PAE | OPTIMIZACIÓN DE ESPACIO EN DEMO
+========================================== */
+
+@media (min-width: 1101px) {
+
+    /* 1. Ampliar el contenedor principal para reducir márgenes laterales */
+    .demo-layout {
+        max-width: 1320px;
+        grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+        gap: clamp(40px, 5vw, 80px);
+    }
+
+    /* 2. Hacer el mockup del teléfono más grande y legible */
+    .demo-device {
+        width: 295px;
+    }
+
+    .demo-visual {
+        height: min(720px, calc(100svh - 100px));
+    }
+
+    /* 3. Expandir el ancho del texto a la derecha para llenar el espacio */
+    .demo-step h3 {
+        max-width: 620px;
+        font-size: clamp(32px, 3vw, 44px);
+    }
+
+    .demo-step p {
+        max-width: 560px;
+        font-size: 15px;
+        line-height: 1.75;
+    }
+
+    /* 4. Compactar la altura de cada paso para evitar huecos verticales */
+    .demo-step {
+        min-height: 250px;
+        padding: 28px 0;
+    }
+}
