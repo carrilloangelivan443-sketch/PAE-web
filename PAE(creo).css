@@ -6632,3 +6632,119 @@ html.js-demo-reveal
     }
 
 }
+
+/* =========================================================
+   PAE | DESKTOP SCROLL PERFORMANCE FIX
+   Diagnóstico y optimización de renderizado
+========================================================= */
+
+@media (min-width: 851px) {
+
+    /* 1. Eliminar capas fijas de textura y viñeta */
+
+    body::before,
+    body::after {
+        display: none !important;
+    }
+
+
+    /* 2. Eliminar el desplazamiento fijo del fondo */
+
+    html,
+    :root[data-theme="dark"] {
+        background-attachment: scroll !important;
+    }
+
+
+    /* 3. Simplificar fotografía principal */
+
+    .hero::after {
+        filter: none !important;
+
+        mask-image: none !important;
+        -webkit-mask-image: none !important;
+    }
+
+
+    /* 4. Eliminar desenfoques ambientales */
+
+    .hero-glow,
+    .visual-orbit,
+    .demo-glow,
+    .demo-section::before,
+    .demo-section::after,
+    .role-section::before,
+    .closing-glow,
+    .call-stage-glow {
+        filter: none !important;
+    }
+
+
+    /* 5. Desactivar iluminación dinámica del cursor */
+
+    .feature-card::before,
+    .teacher-card::before,
+    .teacher-option::before {
+        display: none !important;
+    }
+
+
+    /* 6. Evitar animaciones infinitas */
+
+    .hero-device {
+        animation: none !important;
+    }
+
+
+    /* 7. Simplificar entrada cinematográfica del título */
+
+    .hero-content.is-visible .title-line-first,
+    .hero-content.is-visible .title-line-second {
+
+        animation: none !important;
+
+        filter: none !important;
+        clip-path: none !important;
+
+        opacity: 1 !important;
+
+        transform: none !important;
+    }
+
+
+    /* 8. Eliminar blur y clip-path de las explicaciones */
+
+    html.js-demo-reveal
+    .demo-desktop-layout .demo-step .step-number,
+
+    html.js-demo-reveal
+    .demo-desktop-layout .demo-step h3,
+
+    html.js-demo-reveal
+    .demo-desktop-layout .demo-step p {
+
+        opacity: 1 !important;
+
+        filter: none !important;
+
+        clip-path: none !important;
+
+        animation: none !important;
+    }
+
+
+    /* 9. Simplificar animaciones de las demás secciones */
+
+    .teacher-visual .teacher-option,
+    .closing-content > * {
+
+        opacity: 1 !important;
+
+        filter: none !important;
+
+        animation: none !important;
+
+        transform: none !important;
+    }
+
+}
