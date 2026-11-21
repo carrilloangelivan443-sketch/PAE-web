@@ -34,17 +34,6 @@
 
     --ambient-glow: rgba(108, 31, 47, 0.035);
 
-    /* Tokens used by the layout and component rules below */
-    --rose: var(--pink);
-    --rose-pale: var(--pink-soft);
-    --ambient: var(--ambient-glow);
-    --font-display: "Manrope", sans-serif;
-    --font-body: "Inter", sans-serif;
-    --max-width: 1360px;
-    --nav-height: 72px;
-    --nav-offset: 12px;
-    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-
     --shadow-soft:
         0 10px 35px rgba(63, 32, 38, 0.07);
 
@@ -87,10 +76,6 @@
     --button-text: #FFFFFF;
 
     --ambient-glow: rgba(121, 40, 71, 0.09);
-
-    --rose: var(--pink);
-    --rose-pale: var(--pink-soft);
-    --ambient: var(--ambient-glow);
 
     --shadow-soft:
         0 10px 35px rgba(0, 0, 0, 0.20);
@@ -992,7 +977,7 @@ html::-webkit-scrollbar-button {
 
     gap: clamp(50px, 8vw, 120px);
 
-    max-width: 1200px;
+    max-width: 1130px;
 
     margin: 0 auto;
 }
@@ -2549,60 +2534,11 @@ html::-webkit-scrollbar-button {
     }
 
     .navbar {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) max-content;
-        grid-template-rows: auto auto;
-        row-gap: 5px;
+        width: calc(100% - 18px);
 
-        width: calc(100% - 16px);
-        height: auto;
-        min-height: 64px;
+        padding-inline: 10px;
 
-        padding: 8px 10px 6px;
         border-radius: 14px;
-    }
-
-    .brand {
-        grid-column: 1;
-        grid-row: 1;
-        min-width: 0;
-        gap: 6px;
-    }
-
-    .nav-actions {
-        grid-column: 2;
-        grid-row: 1;
-        gap: 6px;
-    }
-
-    .nav-links {
-        display: flex;
-        grid-column: 1 / -1;
-        grid-row: 2;
-        justify-self: stretch;
-        justify-content: flex-start;
-        gap: 16px;
-        width: 100%;
-        min-width: 0;
-        overflow-x: auto;
-        padding: 5px 2px 2px;
-        white-space: nowrap;
-        scrollbar-width: none;
-    }
-
-    .nav-links::-webkit-scrollbar {
-        display: none;
-    }
-
-    .nav-links a {
-        flex: 0 0 auto;
-        font-size: 10px;
-    }
-
-    .navbar.is-hidden {
-        transform: translateX(-50%);
-        opacity: 1;
-        pointer-events: auto;
     }
 
     .brand {
@@ -2626,16 +2562,21 @@ html::-webkit-scrollbar-button {
         gap: 6px;
     }
 
-    .nav-about,
-    .nav-download {
-        min-height: 34px;
-        padding: 8px 9px;
-        font-size: 10px;
-        white-space: nowrap;
+    .nav-about {
+        display: none;
     }
 
-    .nav-actions .nav-button span {
-        margin-left: 2px;
+    .nav-download {
+        width: 36px;
+        min-height: 36px;
+
+        padding: 0;
+
+        font-size: 0;
+    }
+
+    .nav-download span {
+        font-size: 16px;
     }
 
     .theme-toggle {
@@ -2673,8 +2614,8 @@ html::-webkit-scrollbar-button {
 
     .hero h1 {
         margin-top: 20px;
-        font-size: clamp(36px, 9.5vw, 48px);
-        line-height: 1.08;
+
+        font-size: clamp(39px, 10vw, 53px);
     }
 
     .hero-description {
@@ -2715,11 +2656,12 @@ html::-webkit-scrollbar-button {
 
     .hero-visual {
         width: 100%;
-        min-height: 390px;
+
+        min-height: 450px;
     }
 
     .hero-device {
-        width: min(195px, 54vw);
+        width: 205px;
     }
 
     .visual-orbit {
@@ -2768,16 +2710,27 @@ html::-webkit-scrollbar-button {
     }
 
     .demo-visual {
-        position: relative;
-        top: auto;
-        z-index: 1;
+        position: sticky;
+
+        top: 67px;
+
+        z-index: 10;
 
         width: 100%;
-        height: auto;
-        min-height: 0;
+        height: 385px;
+        min-height: 385px;
 
-        padding: 8px 0 18px;
-        background: transparent;
+        background:
+            linear-gradient(
+                180deg,
+                var(--bg-soft) 0%,
+                color-mix(
+                    in srgb,
+                    var(--bg-soft) 90%,
+                    transparent
+                ) 78%,
+                transparent 100%
+            );
     }
 
     .demo-device {
@@ -2803,35 +2756,17 @@ html::-webkit-scrollbar-button {
     }
 
     .demo-step {
-        min-height: 0;
-        padding: 30px 0;
-        opacity: 1;
+        min-height: 285px;
+
+        padding: 34px 0;
     }
 
     .demo-step h3 {
-        max-width: 100%;
-        font-size: clamp(25px, 7vw, 30px);
-        line-height: 1.16;
+        font-size: 29px;
     }
 
     .demo-step p {
-        max-width: 100%;
-        font-size: 13px;
-        line-height: 1.7;
-    }
-
-    .demo-step h3,
-    .demo-step p,
-    .demo-step .step-number {
-        transform: none;
-        filter: none;
-        clip-path: none;
-    }
-
-    .demo-step.has-entered .step-number,
-    .demo-step.has-entered h3,
-    .demo-step.has-entered p {
-        animation: none;
+        font-size: 12px;
     }
 
     .step-hint {
@@ -2859,30 +2794,10 @@ html::-webkit-scrollbar-button {
         gap: 9px;
     }
 
-    .feature-card,
-    .teacher-card,
-    .teacher-option {
-        background: var(--bg-card);
-        border-color: var(--border);
-        box-shadow: var(--shadow-soft);
-    }
-
     .feature-card {
-        min-height: 150px;
+        min-height: 160px;
+
         padding: 16px 14px;
-        transform: none;
-    }
-
-    .feature-card::before,
-    .teacher-card::before,
-    .teacher-option::before {
-        display: none;
-    }
-
-    .feature-card:hover,
-    .teacher-card:hover,
-    .teacher-option:hover {
-        transform: none;
     }
 
     .feature-card h3 {
@@ -2942,31 +2857,12 @@ html::-webkit-scrollbar-button {
 
     .footer {
         flex-direction: column;
+
         justify-content: center;
+
         padding: 27px 20px;
+
         text-align: center;
-    }
-
-    /* Las entradas laterales son excesivas en pantallas táctiles. */
-    .reveal,
-    .reveal-left,
-    .reveal-right,
-    .reveal-up {
-        filter: none;
-        transform: translateY(10px);
-        transition: opacity 320ms ease, transform 320ms ease;
-    }
-
-    .reveal.is-visible {
-        opacity: 1;
-        transform: none;
-    }
-
-    .hero-content.is-visible .title-line-first,
-    .hero-content.is-visible .title-line-second {
-        animation: mobileTitleIn 420ms ease both;
-        clip-path: none;
-        filter: none;
     }
 
 }
@@ -3930,6 +3826,33 @@ body {
 
 /* MÓVILES: CONSERVAR PROPORCIONES */
 
+@media (max-width: 600px) {
+
+    .navbar {
+        min-height: 64px;
+    }
+
+    .hero h1 {
+        font-size: clamp(37px, 9vw, 48px);
+    }
+
+    .hero-device {
+        width: 195px;
+    }
+
+    .demo-device {
+        width: 158px;
+    }
+
+    .demo-step {
+        min-height: 270px;
+    }
+
+    .role-content h2 {
+        font-size: 40px;
+    }
+
+}
 
 /* ==========================================
    PAE | HERO BUTTON REFINEMENT
@@ -4504,16 +4427,12 @@ body::after {
 
 @media (max-width: 700px) {
 
-    body::before {
-        opacity: 0.012;
-    }
-
     body::after {
         background:
             radial-gradient(
                 ellipse at center,
-                transparent 48%,
-                rgba(0, 0, 0, 0.08) 100%
+                transparent 45%,
+                rgba(0, 0, 0, 0.10) 100%
             );
     }
 
@@ -4521,8 +4440,8 @@ body::after {
         background:
             radial-gradient(
                 ellipse at center,
-                transparent 42%,
-                rgba(0, 0, 0, 0.22) 100%
+                transparent 35%,
+                rgba(0, 0, 0, 0.48) 100%
             );
     }
 
@@ -4855,67 +4774,146 @@ html.js-demo-reveal
     }
 }
 
-/* Movimiento breve para los títulos en móvil. */
-@keyframes mobileTitleIn {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* ==========================================================
+   PAE | MOBILE HEADER & ANIMATION RESTORE
+   Corrección del header y las animaciones móviles.
+========================================================== */
 
-/* Tabletas: conservar navegación accesible sin comprimir el encabezado. */
-@media (min-width: 601px) and (max-width: 850px) {
+@media (max-width: 600px) {
+
+    /* HEADER: recuperar diseño compacto de una sola fila */
+
     .navbar {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) max-content;
-        grid-template-rows: auto auto;
-        row-gap: 5px;
-        width: calc(100% - 28px);
-        height: auto;
-        padding: 9px 14px 7px;
+        display: grid !important;
+
+        grid-template-columns: minmax(0, 1fr) max-content !important;
+        grid-template-rows: 1fr !important;
+
+        align-items: center;
+
+        width: calc(100% - 18px);
+        height: 64px !important;
+        min-height: 64px !important;
+
+        padding: 8px 10px !important;
+
+        column-gap: 8px;
+        row-gap: 0 !important;
+
+        border-radius: 14px;
     }
 
     .brand {
-        grid-column: 1;
-        grid-row: 1;
-        min-width: 0;
-    }
+        grid-column: 1 !important;
+        grid-row: 1 !important;
 
-    .nav-actions {
-        grid-column: 2;
-        grid-row: 1;
-        gap: 7px;
-    }
-
-    .nav-links {
         display: flex;
-        grid-column: 1 / -1;
-        grid-row: 2;
-        justify-content: flex-start;
-        gap: 20px;
-        width: 100%;
         min-width: 0;
-        overflow-x: auto;
-        padding: 5px 2px 2px;
-        white-space: nowrap;
-        scrollbar-width: none;
+        gap: 6px;
     }
 
-    .nav-links::-webkit-scrollbar {
-        display: none;
+    .brand-logo {
+        width: 27px;
+        height: 30px;
     }
 
-    .nav-links a {
-        flex: 0 0 auto;
+    .brand-name {
+        font-size: 17px;
     }
 
+    /* Ocultar enlaces secundarios y Sobre nosotros */
+    .nav-links {
+        display: none !important;
+    }
+
+    .nav-about {
+        display: none !important;
+    }
+
+    /* Descargar: conservar solamente el icono */
+    .nav-actions {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+
+        display: flex;
+        align-items: center;
+        justify-self: end;
+
+        gap: 6px;
+        width: max-content;
+    }
+
+    .nav-download {
+        display: inline-flex !important;
+
+        width: 36px;
+        min-width: 36px;
+        height: 36px;
+        min-height: 36px;
+
+        justify-content: center;
+
+        padding: 0;
+
+        border-radius: 50%;
+
+        font-size: 0;
+    }
+
+    .nav-download span {
+        display: inline;
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+    }
+
+    /* Restaurar ocultamiento del header al bajar */
     .navbar.is-hidden {
-        transform: translateX(-50%);
+        transform: translate(-50%, calc(-100% - 25px)) !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    /* Separar el mockup del header compacto */
+    .demo-visual {
+        top: 78px;
+    }
+
+    /* Recuperar las animaciones individuales de cada paso */
+    .demo-step.has-entered .step-number {
+        animation: demoRevealRight 950ms
+            cubic-bezier(0.22, 1, 0.36, 1)
+            0ms both;
+    }
+
+    .demo-step.has-entered h3 {
+        animation: demoRevealRight 1100ms
+            cubic-bezier(0.22, 1, 0.36, 1)
+            130ms both;
+    }
+
+    .demo-step.has-entered p {
+        animation: demoRevealRight 1100ms
+            cubic-bezier(0.22, 1, 0.36, 1)
+            260ms both;
+    }
+}
+
+
+/* Respetar la preferencia del dispositivo */
+@media (prefers-reduced-motion: reduce) {
+
+    .demo-step.has-entered .step-number,
+    .demo-step.has-entered h3,
+    .demo-step.has-entered p {
+        animation: none !important;
         opacity: 1;
-        pointer-events: auto;
+        filter: none;
+        transform: none;
+        clip-path: none;
     }
 }

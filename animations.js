@@ -260,84 +260,69 @@
 
         function initializeDemoObserver() {
 
-            destroyDemoObserver();
+    destroyDemoObserver();
 
-            // En móvil todas las explicaciones permanecen visibles.
-            // El usuario cambia la pantalla mediante los indicadores
-            // o tocando una explicación.
-            if (mobileViewport.matches) {
+    // Fallback para navegadores sin IntersectionObserver.
+    if (!("IntersectionObserver" in window)) {
 
-                steps.forEach((step) => {
-                    step.classList.add("has-entered");
-                });
+        steps.forEach((step) => {
+            step.classList.add("has-entered");
+        });
 
-                return;
-            }
+        return;
+    }
 
-            // Sin IntersectionObserver, dejar los pasos visibles.
-            if (!("IntersectionObserver" in window)) {
+    visibleRatios.clear();
 
-                steps.forEach((step) => {
-                    step.classList.add("has-entered");
-                });
+    steps.forEach((step) => {
+        visibleRatios.set(Number(step.dataset.step), 0);
+    });
 
-                return;
-            }
+    demoObserver = new IntersectionObserver(
+        (entries) => {
 
+            entries.forEach((entry) => {
 
-            visibleRatios.clear();
+                const index = Number(entry.target.dataset.step);
 
-            steps.forEach((step) => {
-                visibleRatios.set(Number(step.dataset.step), 0);
-            });
+                if (!Number.isInteger(index)) return;
 
+                if (entry.isIntersecting) {
 
-            demoObserver = new IntersectionObserver(
-                (entries) => {
+                    // Animar únicamente cuando el paso entra
+                    // realmente en el área visible.
+                    entry.target.classList.add("has-entered");
 
-                    entries.forEach((entry) => {
+                    visibleRatios.set(
+                        index,
+                        entry.intersectionRatio
+                    );
 
-                        const index = Number(entry.target.dataset.step);
+                } else {
 
-                        if (!Number.isInteger(index)) return;
-
-                        if (entry.isIntersecting) {
-
-                            entry.target.classList.add("has-entered");
-
-                            visibleRatios.set(
-                                index,
-                                entry.intersectionRatio
-                            );
-
-                        } else {
-
-                            visibleRatios.set(index, 0);
-                        }
-                    });
-
-
-                    // Elegir el paso con mayor visibilidad.
-                    const mostVisible = [...visibleRatios.entries()]
-                        .filter(([, ratio]) => ratio > 0)
-                        .sort((a, b) => b[1] - a[1])[0];
-
-                    if (mostVisible) {
-                        changeDemoScreen(mostVisible[0]);
-                    }
-                },
-                {
-                    threshold: [0.15, 0.3, 0.45, 0.6, 0.75],
-                    rootMargin: "-15% 0px -15% 0px"
+                    visibleRatios.set(index, 0);
                 }
-            );
-
-            steps.forEach((step) => {
-                demoObserver.observe(step);
             });
+
+            // Sincronizar el mockup con el paso más visible.
+            const mostVisible = [...visibleRatios.entries()]
+                .filter(([, ratio]) => ratio > 0)
+                .sort((a, b) => b[1] - a[1])[0];
+
+            if (mostVisible) {
+                changeDemoScreen(mostVisible[0]);
+            }
+        },
+        {
+            threshold: [0.15, 0.3, 0.45, 0.6, 0.75],
+            rootMargin: "-15% 0px -15% 0px"
         }
+    );
 
-
+    steps.forEach((step) => {
+        demoObserver.observe(step);
+    });
+}
         /* ---------------------------------------------
            Eventos de los pasos
         --------------------------------------------- */
@@ -414,101 +399,79 @@
     }
 
 
-    /* =====================================================
-       3. SMART HEADER
-       Oculta la navegación al bajar en PC y la muestra
-       al subir. En móviles permanece visible.
-    ===================================================== */
+ function initializeNavbar() {
 
-    function initializeNavbar() {
+    const navbar = document.querySelector(".navbar");
 
-        const navbar = document.querySelector(".navbar");
+    if (!navbar) return;
 
-        if (!navbar) return;
+    let lastScrollY = window.scrollY;
+    let animationFrame = null;
 
-        let lastScrollY = window.scrollY;
-        let animationFrame = null;
+    const scrollThreshold = 8;
+    const topThreshold = 80;
 
-        const scrollThreshold = 8;
-        const topThreshold = 80;
+    function updateNavbar() {
 
-
-        function updateNavbar() {
-
-            const currentScrollY = Math.max(
-                0,
-                window.scrollY
-            );
-
-            const delta = currentScrollY - lastScrollY;
-
-
-            // No ocultar el menú en pantallas pequeñas.
-            if (mobileViewport.matches) {
-
-                navbar.classList.remove("is-hidden");
-
-                lastScrollY = currentScrollY;
-                animationFrame = null;
-
-                return;
-            }
-
-
-            // Cerca del inicio, la navegación siempre aparece.
-            if (currentScrollY < topThreshold) {
-
-                navbar.classList.remove("is-hidden");
-
-            } else if (delta > scrollThreshold) {
-
-                // Bajando.
-                navbar.classList.add("is-hidden");
-
-            } else if (delta < -scrollThreshold) {
-
-                // Subiendo.
-                navbar.classList.remove("is-hidden");
-            }
-
-
-            lastScrollY = currentScrollY;
-            animationFrame = null;
-        }
-
-
-        window.addEventListener(
-            "scroll",
-            () => {
-
-                if (animationFrame !== null) return;
-
-                animationFrame = window.requestAnimationFrame(
-                    updateNavbar
-                );
-            },
-            { passive: true }
+        const currentScrollY = Math.max(
+            0,
+            window.scrollY
         );
 
+        const delta = currentScrollY - lastScrollY;
 
-        // Actualizar el menú si se rota o cambia el tamaño.
-        const handleViewportChange = () => {
+        // Cerca del inicio siempre mostrar el header.
+        if (currentScrollY < topThreshold) {
 
             navbar.classList.remove("is-hidden");
 
-            lastScrollY = window.scrollY;
-        };
+        } else if (delta > scrollThreshold) {
 
-        if (mobileViewport.addEventListener) {
-            mobileViewport.addEventListener(
-                "change",
-                handleViewportChange
-            );
-        } else {
-            mobileViewport.addListener(handleViewportChange);
+            // Bajando: ocultar.
+            navbar.classList.add("is-hidden");
+
+        } else if (delta < -scrollThreshold) {
+
+            // Subiendo: mostrar.
+            navbar.classList.remove("is-hidden");
         }
+
+        lastScrollY = currentScrollY;
+        animationFrame = null;
     }
 
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            if (animationFrame !== null) return;
+
+            animationFrame = window.requestAnimationFrame(
+                updateNavbar
+            );
+        },
+        { passive: true }
+    );
+
+    // Si cambia la orientación, mostrar inicialmente el header.
+    const handleViewportChange = () => {
+
+        navbar.classList.remove("is-hidden");
+        lastScrollY = window.scrollY;
+    };
+
+    if (mobileViewport.addEventListener) {
+
+        mobileViewport.addEventListener(
+            "change",
+            handleViewportChange
+        );
+
+    } else {
+
+        mobileViewport.addListener(handleViewportChange);
+    }
+}
 
     /* =====================================================
        4. CURSOR SPOTLIGHT
