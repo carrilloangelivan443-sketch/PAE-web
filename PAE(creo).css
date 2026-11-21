@@ -2305,3 +2305,39 @@ html.js-demo-reveal .closing-content:not(.is-visible) > * {
         animation: none !important;
     }
 }
+
+/* =========================================================
+   CORRECCIÓN FINAL: TÍTULO BLANCO Y RENDIMIENTO DEL TELÉFONO
+========================================================= */
+
+/* 1. Forzar título principal en blanco (modo oscuro) y oscuro (modo claro) */
+.hero h1,
+.hero h1 span,
+.hero-title,
+.hero-title span,
+.hero-title .title-line-first,
+.hero-title .title-line-second {
+    color: var(--text) !important;
+    -webkit-text-fill-color: var(--text) !important;
+    background: none !important;
+}
+
+:root[data-theme="dark"] .hero h1,
+:root[data-theme="dark"] .hero h1 span,
+:root[data-theme="dark"] .hero-title,
+:root[data-theme="dark"] .hero-title span,
+:root[data-theme="dark"] .hero-title .title-line-first,
+:root[data-theme="dark"] .hero-title .title-line-second {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    background: none !important;
+}
+
+/* 2. Eliminar levitación y sombras pesadas del teléfono para recuperar FPS */
+.hero-device,
+.device {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35) !important;
+}
