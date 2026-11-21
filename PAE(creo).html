@@ -18,84 +18,21 @@
         (() => {
             try {
                 const savedTheme = localStorage.getItem("pae-theme");
-
                 document.documentElement.dataset.theme =
                     savedTheme === "dark" ? "dark" : "light";
-
             } catch (error) {
                 document.documentElement.dataset.theme = "light";
             }
         })();
     </script>
 
-    <!-- Tipografías -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet">
-
     <!-- Estilos -->
     <link rel="stylesheet" href="PAE(creo).css">
 
-    <!-- Un solo archivo controla las interacciones -->
+    <!-- Control de interacciones y animaciones -->
     <script src="animations.js?v=3" defer></script>
 </head>
 
-<script>
-(() => {
-
-    const root = document.documentElement;
-
-    const button = document.getElementById("themeToggle");
-
-    const meta = document.querySelector(
-        'meta[name="theme-color"]'
-    );
-
-    if (!button) {
-        console.error("No se encontró el botón de tema.");
-        return;
-    }
-
-    function updateTheme(theme) {
-        const dark = theme === "dark";
-
-        root.dataset.theme = dark ? "dark" : "light";
-
-        button.setAttribute("aria-pressed", String(dark));
-
-        button.setAttribute(
-            "aria-label",
-            dark ? "Activar modo claro" : "Activar modo oscuro"
-        );
-
-        if (meta) {
-            meta.content = dark ? "#0D0C0E" : "#6C1F2F";
-        }
-
-        try {
-            localStorage.setItem(
-                "pae-theme",
-                dark ? "dark" : "light"
-            );
-        } catch (error) {
-            console.warn("No se pudo guardar la preferencia.");
-        }
-    }
-
-    updateTheme(root.dataset.theme || "light");
-
-    button.addEventListener("click", () => {
-        const nextTheme =
-            root.dataset.theme === "dark" ? "light" : "dark";
-
-        updateTheme(nextTheme);
-    });
-
-})();
-</script>
-<!--Yo Angel Ivan Carrillo Andres hice la pagina lol jajjaja fueron muchas tardes y noches que me desvele -->
 <body>
 
     <!-- =================================
@@ -189,10 +126,10 @@
                         Una sola plataforma.
                     </span>
                 </h1>
+
                 <p class="hero-description">
                     Conecta tus clases, consulta tu información
                     académica y mantente al día.
-
                     Todo desde un solo lugar.
                 </p>
 
@@ -256,7 +193,8 @@
         <!-- =================================
              02. DEMOSTRACIÓN INTERACTIVA
         ================================== -->
-                <section class="demo-section" id="demo">
+
+        <section class="demo-section" id="demo">
 
             <div class="section-heading reveal reveal-up">
 
@@ -278,7 +216,7 @@
             <div class="demo-layout">
 
 
-                <!-- TELÉFONO STICKY -->
+                <!-- TELÉFONO STICKY (SOLO ESCRITORIO) -->
 
                 <aside class="demo-visual"
                        aria-label="Demostración de las pantallas del PAE">
@@ -297,7 +235,9 @@
                                  data-screen="0">
 
                                 <img src="fotos/Login App.jpg"
-                                     alt="Acceso a la aplicación PAE" loading="lazy" decoding="async">
+                                     alt="Acceso a la aplicación PAE"
+                                     loading="lazy"
+                                     decoding="async">
 
                             </div>
 
@@ -309,7 +249,9 @@
                                  aria-hidden="true">
 
                                 <img src="fotos/Pantalla principal.jpeg"
-                                     alt="Panel principal del estudiante" loading="lazy" decoding="async">
+                                     alt="Panel principal del estudiante"
+                                     loading="lazy"
+                                     decoding="async">
 
                             </div>
 
@@ -321,7 +263,9 @@
                                  aria-hidden="true">
 
                                 <img src="fotos/horarioft.jpeg"
-                                     alt="Horario escolar" loading="lazy" decoding="async">
+                                     alt="Horario escolar"
+                                     loading="lazy"
+                                     decoding="async">
 
                             </div>
 
@@ -333,13 +277,14 @@
                                  aria-hidden="true">
 
                                 <img src="fotos/calificacionesft.jpeg"
-                                     alt="Consulta de calificaciones" loading="lazy" decoding="async">
+                                     alt="Consulta de calificaciones"
+                                     loading="lazy"
+                                     decoding="async">
 
                             </div>
 
 
                             <!-- PANTALLA 5: VIDEOLLAMADAS -->
-                            <!-- Representación conceptual -->
 
                             <div class="demo-panel"
                                  data-screen="4"
@@ -347,73 +292,46 @@
 
                                 <div class="concept-screen call-concept">
 
-
                                     <div class="concept-topline">
-
                                         <span>PAE · AULA VIRTUAL</span>
-
                                         <span class="concept-live">
                                             <i aria-hidden="true"></i>
                                             EN LÍNEA
                                         </span>
-
                                     </div>
-
 
                                     <div class="concept-heading">
-
                                         <span>CLASE EN LÍNEA</span>
-
                                         <h4>Sesión de clase</h4>
-
                                         <p>Conecta con tu grupo.</p>
-
                                     </div>
-
 
                                     <div class="call-stage">
-
                                         <div class="call-avatar">P</div>
-
                                         <strong>Docente</strong>
-
                                         <span>Clase en progreso</span>
-
-                                        <div class="call-stage-glow"
-                                             aria-hidden="true"></div>
-
+                                        <div class="call-stage-glow" aria-hidden="true"></div>
                                     </div>
-
 
                                     <div class="call-self-view">
-
                                         <div class="self-avatar">A</div>
-
                                         <span>Tu cámara</span>
-
                                     </div>
 
-
-                                    <div class="call-controls"
-                                         aria-hidden="true">
-
+                                    <div class="call-controls" aria-hidden="true">
                                         <div>
                                             <span>◉</span>
                                             <small>Audio</small>
                                         </div>
-
                                         <div>
                                             <span>▣</span>
                                             <small>Cámara</small>
                                         </div>
-
                                         <div class="call-end">
                                             <span>■</span>
                                             <small>Salir</small>
                                         </div>
-
                                     </div>
-
 
                                     <span class="concept-disclaimer">
                                         REPRESENTACIÓN CONCEPTUAL
@@ -432,113 +350,59 @@
 
                                 <div class="concept-screen tasks-concept">
 
-
                                     <div class="concept-topline">
-
                                         <span>PAE · ESPACIO ESTUDIANTIL</span>
-
                                         <span aria-hidden="true">▤</span>
-
                                     </div>
-
 
                                     <div class="concept-heading">
-
                                         <span>ACTIVIDADES ACADÉMICAS</span>
-
                                         <h4>Mis tareas</h4>
-
-                                        <p>
-                                            Todo lo que necesitas tener presente.
-                                        </p>
-
+                                        <p>Todo lo que necesitas tener presente.</p>
                                     </div>
 
-
                                     <div class="task-summary">
-
                                         <div>
                                             <small>ACTIVIDADES</small>
                                             <strong>Organizadas</strong>
                                         </div>
-
                                         <span aria-hidden="true">✦</span>
-
                                     </div>
-
 
                                     <div class="task-list">
 
-
                                         <article class="task-item">
-
-                                            <div class="task-icon"
-                                                 aria-hidden="true">▤</div>
-
+                                            <div class="task-icon" aria-hidden="true">▤</div>
                                             <div class="task-info">
-
                                                 <strong>Actividad de clase</strong>
-
-                                                <small>
-                                                    Instrucciones del profesor
-                                                </small>
-
+                                                <small>Instrucciones del profesor</small>
                                             </div>
-
-                                            <span class="task-status">
-                                                Pendiente
-                                            </span>
-
+                                            <span class="task-status">Pendiente</span>
                                         </article>
 
-                                    <!-- Maldisionesto me tomo bastante tendre que ordenar todo el codigo despues-->
                                         <article class="task-item">
-
-                                            <div class="task-icon"
-                                                 aria-hidden="true">↥</div>
-
+                                            <div class="task-icon" aria-hidden="true">↥</div>
                                             <div class="task-info">
-
                                                 <strong>Material de apoyo</strong>
-
                                                 <small>Archivo compartido</small>
-
                                             </div>
-
-                                            <span class="task-status">
-                                                Archivo
-                                            </span>
-
+                                            <span class="task-status">Archivo</span>
                                         </article>
-
 
                                         <article class="task-item">
-
-                                            <div class="task-icon"
-                                                 aria-hidden="true">✎</div>
-
+                                            <div class="task-icon" aria-hidden="true">✎</div>
                                             <div class="task-info">
-
                                                 <strong>Trabajo académico</strong>
-
                                                 <small>Actividad asignada</small>
-
                                             </div>
-
-                                            <span class="task-status">
-                                                Pendiente
-                                            </span>
-
+                                            <span class="task-status">Pendiente</span>
                                         </article>
-
 
                                     </div>
-
 
                                     <div class="task-footer">
                                         Materiales y actividades en un solo espacio.
                                     </div>
-
 
                                     <span class="concept-disclaimer">
                                         REPRESENTACIÓN CONCEPTUAL
@@ -611,7 +475,7 @@
                 </aside>
 
 
-                <!-- EXPLICACIONES DEL SCROLL -->
+                <!-- PASOS (EN ESCRITORIO: LISTA INTERACTIVA · EN MÓVIL: TARJETAS CON TELÉFONO) -->
 
                 <div class="demo-steps">
 
@@ -625,20 +489,33 @@
                              role="button"
                              aria-pressed="true">
 
-                        <span class="step-number">01 / ACCESO</span>
+                        <div class="step-mobile-phone" aria-hidden="true">
+                            <div class="device">
+                                <div class="device-screen">
+                                    <img src="fotos/Login App.jpg"
+                                         alt=""
+                                         loading="lazy"
+                                         decoding="async">
+                                </div>
+                            </div>
+                        </div>
 
-                        <h3>
-                            Tu espacio académico comienza aquí.
-                        </h3>
+                        <div class="step-body">
+                            <span class="step-number">01 / ACCESO</span>
 
-                        <p>
-                            Accede a la plataforma mediante tu
-                            boleta o usuario docente y contraseña.
-                        </p>
+                            <h3>
+                                Tu espacio académico comienza aquí.
+                            </h3>
 
-                        <span class="step-hint">
-                            Seleccionar pantalla ↗
-                        </span>
+                            <p>
+                                Accede a la plataforma mediante tu
+                                boleta o usuario docente y contraseña.
+                            </p>
+
+                            <span class="step-hint">
+                                Seleccionar pantalla ↗
+                            </span>
+                        </div>
 
                     </article>
 
@@ -652,21 +529,34 @@
                              role="button"
                              aria-pressed="false">
 
-                        <span class="step-number">02 / INICIO</span>
+                        <div class="step-mobile-phone" aria-hidden="true">
+                            <div class="device">
+                                <div class="device-screen">
+                                    <img src="fotos/Pantalla principal.jpeg"
+                                         alt=""
+                                         loading="lazy"
+                                         decoding="async">
+                                </div>
+                            </div>
+                        </div>
 
-                        <h3>
-                            Todo comienza en un solo lugar.
-                        </h3>
+                        <div class="step-body">
+                            <span class="step-number">02 / INICIO</span>
 
-                        <p>
-                            Encuentra tus herramientas indispensables,
-                            consulta tu horario, tareas, avisos,
-                            anuncios y más desde tu pantalla principal.
-                        </p>
+                            <h3>
+                                Todo comienza en un solo lugar.
+                            </h3>
 
-                        <span class="step-hint">
-                            Seleccionar pantalla ↗
-                        </span>
+                            <p>
+                                Encuentra tus herramientas indispensables,
+                                consulta tu horario, tareas, avisos,
+                                anuncios y más desde tu pantalla principal.
+                            </p>
+
+                            <span class="step-hint">
+                                Seleccionar pantalla ↗
+                            </span>
+                        </div>
 
                     </article>
 
@@ -680,21 +570,34 @@
                              role="button"
                              aria-pressed="false">
 
-                        <span class="step-number">03 / ORGANIZACIÓN</span>
+                        <div class="step-mobile-phone" aria-hidden="true">
+                            <div class="device">
+                                <div class="device-screen">
+                                    <img src="fotos/horarioft.jpeg"
+                                         alt=""
+                                         loading="lazy"
+                                         decoding="async">
+                                </div>
+                            </div>
+                        </div>
 
-                        <h3>
-                            Tu horario, siempre a la mano.
-                        </h3>
+                        <div class="step-body">
+                            <span class="step-number">03 / ORGANIZACIÓN</span>
 
-                        <p>
-                            Mantén tu agenda, clases, tareas y
-                            actividades organizadas y a un solo
-                            clic de distancia.
-                        </p>
+                            <h3>
+                                Tu horario, siempre a la mano.
+                            </h3>
 
-                        <span class="step-hint">
-                            Seleccionar pantalla ↗
-                        </span>
+                            <p>
+                                Mantén tu agenda, clases, tareas y
+                                actividades organizadas y a un solo
+                                clic de distancia.
+                            </p>
+
+                            <span class="step-hint">
+                                Seleccionar pantalla ↗
+                            </span>
+                        </div>
 
                     </article>
 
@@ -708,21 +611,34 @@
                              role="button"
                              aria-pressed="false">
 
-                        <span class="step-number">04 / PROGRESO</span>
+                        <div class="step-mobile-phone" aria-hidden="true">
+                            <div class="device">
+                                <div class="device-screen">
+                                    <img src="fotos/calificacionesft.jpeg"
+                                         alt=""
+                                         loading="lazy"
+                                         decoding="async">
+                                </div>
+                            </div>
+                        </div>
 
-                        <h3>
-                            Tu información académica.
-                        </h3>
+                        <div class="step-body">
+                            <span class="step-number">04 / PROGRESO</span>
 
-                        <p>
-                            Consulta tus calificaciones, créditos
-                            y caso de reinscripción, y mantente
-                            al tanto de tu trayectoria escolar.
-                        </p>
+                            <h3>
+                                Tu información académica.
+                            </h3>
 
-                        <span class="step-hint">
-                            Seleccionar pantalla ↗
-                        </span>
+                            <p>
+                                Consulta tus calificaciones, créditos
+                                y caso de reinscripción, y mantente
+                                al tanto de tu trayectoria escolar.
+                            </p>
+
+                            <span class="step-hint">
+                                Seleccionar pantalla ↗
+                            </span>
+                        </div>
 
                     </article>
 
@@ -736,22 +652,50 @@
                              role="button"
                              aria-pressed="false">
 
-                        <span class="step-number">05 / CONECTIVIDAD</span>
+                        <div class="step-mobile-phone" aria-hidden="true">
+                            <div class="device">
+                                <div class="device-screen">
+                                    <div class="concept-screen call-concept mini-concept">
+                                        <div class="concept-topline">
+                                            <span>PAE · AULA</span>
+                                            <span class="concept-live"><i></i>EN VIVO</span>
+                                        </div>
+                                        <div class="concept-heading">
+                                            <span>CLASE EN LÍNEA</span>
+                                            <h4>Sesión</h4>
+                                        </div>
+                                        <div class="call-stage">
+                                            <div class="call-avatar">P</div>
+                                            <strong>Docente</strong>
+                                        </div>
+                                        <div class="call-controls">
+                                            <div><span>◉</span></div>
+                                            <div><span>▣</span></div>
+                                            <div class="call-end"><span>■</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                        <h3>
-                            Tu salón de clases, también en línea.
-                        </h3>
+                        <div class="step-body">
+                            <span class="step-number">05 / CONECTIVIDAD</span>
 
-                        <p>
-                            Conéctate con tus profesores y
-                            compañeros mediante las clases
-                            virtuales integradas en la experiencia
-                            del PAE.
-                        </p>
+                            <h3>
+                                Tu salón de clases, también en línea.
+                            </h3>
 
-                        <span class="step-hint">
-                            Seleccionar pantalla ↗
-                        </span>
+                            <p>
+                                Conéctate con tus profesores y
+                                compañeros mediante las clases
+                                virtuales integradas en la experiencia
+                                del PAE.
+                            </p>
+
+                            <span class="step-hint">
+                                Seleccionar pantalla ↗
+                            </span>
+                        </div>
 
                     </article>
 
@@ -765,20 +709,56 @@
                              role="button"
                              aria-pressed="false">
 
-                        <span class="step-number">06 / ACTIVIDADES</span>
+                        <div class="step-mobile-phone" aria-hidden="true">
+                            <div class="device">
+                                <div class="device-screen">
+                                    <div class="concept-screen tasks-concept mini-concept">
+                                        <div class="concept-topline">
+                                            <span>PAE · TAREAS</span>
+                                            <span>▤</span>
+                                        </div>
+                                        <div class="concept-heading">
+                                            <span>ACTIVIDADES</span>
+                                            <h4>Mis tareas</h4>
+                                        </div>
+                                        <div class="task-list">
+                                            <div class="task-item">
+                                                <div class="task-icon">▤</div>
+                                                <div class="task-info">
+                                                    <strong>Actividad</strong>
+                                                    <small>Pendiente</small>
+                                                </div>
+                                            </div>
+                                            <div class="task-item">
+                                                <div class="task-icon">↥</div>
+                                                <div class="task-info">
+                                                    <strong>Material</strong>
+                                                    <small>Archivo</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                        <h3>
-                            Tus actividades, siempre organizadas.
-                        </h3>
+                        <div class="step-body">
+                            <span class="step-number">06 / ACTIVIDADES</span>
 
-                        <p>
-                            Consulta tareas, recibe instrucciones
-                            y accede a imágenes y archivos
-                            compartidos por tus profesores.
-                        </p>
-                                                <span class="step-hint">
-                            Seleccionar pantalla ↗
-                        </span>
+                            <h3>
+                                Tus actividades, siempre organizadas.
+                            </h3>
+
+                            <p>
+                                Consulta tareas, recibe instrucciones
+                                y accede a imágenes y archivos
+                                compartidos por tus profesores.
+                            </p>
+
+                            <span class="step-hint">
+                                Seleccionar pantalla ↗
+                            </span>
+                        </div>
 
                     </article>
 
@@ -953,7 +933,9 @@
             </div>
 
         </section>
-                <!-- =================================
+
+
+        <!-- =================================
              05. CIERRE
         ================================== -->
 
@@ -971,8 +953,8 @@
                 </h2>
 
                 <p>
-                    El Portal de Acceso Estudiantil.
-                    Está aquí para mejorar tu experiencia académica.
+                    El Portal de Acceso Estudiantil
+                    está aquí para mejorar tu experiencia académica.
                 </p>
 
                 <a href="Acerca de.html" class="button-primary">
@@ -991,12 +973,12 @@
          PIE DE PÁGINA
     ================================== -->
 
-<footer class="footer reveal reveal-up">
+    <footer class="footer reveal reveal-up">
         <div class="footer-brand">
 
-            <img src="fotos/IPN logo.jpg" alt="IPN" loading="lazy" decoding="async">
+            <img src="fotos/IPN logo.jpg" alt="IPN">
 
-            <img src="fotos/CECYT5 logo.jpg" alt="CECyT 5" loading="lazy" decoding="async">
+            <img src="fotos/CECYT5 logo.jpg" alt="CECyT 5">
 
             <strong>PAE</strong>
 
@@ -1012,7 +994,44 @@
 
     </footer>
 
+    <!-- Control del botón de tema (ubicado al final del body para que #themeToggle ya exista) -->
+    <script>
+    (() => {
+        const root = document.documentElement;
+        const button = document.getElementById("themeToggle");
+        const meta = document.querySelector('meta[name="theme-color"]');
+
+        if (!button) return;
+
+        function updateTheme(theme) {
+            const dark = theme === "dark";
+            root.dataset.theme = dark ? "dark" : "light";
+            button.setAttribute("aria-pressed", String(dark));
+            button.setAttribute(
+                "aria-label",
+                dark ? "Activar modo claro" : "Activar modo oscuro"
+            );
+
+            if (meta) {
+                meta.content = dark ? "#0D0C0E" : "#6C1F2F";
+            }
+
+            try {
+                localStorage.setItem("pae-theme", dark ? "dark" : "light");
+            } catch (error) {
+                // Ignorar si localStorage está bloqueado
+            }
+        }
+
+        updateTheme(root.dataset.theme || "light");
+
+        button.addEventListener("click", () => {
+            const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+            updateTheme(nextTheme);
+        });
+    })();
+    </script>
+
 </body>
 
 </html>
-
