@@ -20,7 +20,12 @@
     --muted: #76656A;
 
     --border: rgba(108,31,47,0.14);
+    --border-strong: rgba(108,31,47,0.27);
     --glass: rgba(250,245,239,0.70);
+    --ambient: rgba(108,31,47,0.035);
+    --rose: var(--pink);
+    --rose-pale: var(--pink-soft);
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
     --header-bg: #6C1F2F;
     --header-text: #F7F0E8;
@@ -34,7 +39,7 @@
     --font-display: "Manrope", sans-serif;
     --font-body: "Inter", sans-serif;
 
-    --max-width: 1240px;
+    --max-width: 1320px;
 }
 
 
@@ -52,27 +57,31 @@
     --wine-light: #785064;
 
     --pink: #D5A0AF;
-    
+    --pink-soft: #E8CDD5;
+
     --text: #F5F3F4;
     --muted: #BCB5BA;
-    
+
     --border: rgba(255,255,255,0.09);
+    --border-strong: rgba(229,162,181,0.25);
     --glass: rgba(255,255,255,0.045);
-    
+    --ambient: rgba(121,40,71,0.09);
+    --rose: var(--pink);
+    --rose-pale: var(--pink-soft);
+
     --header-bg: rgba(13,12,14,0.72);
     --header-text: #F5F3F4;
-    
+
     --button-bg: #704054;
     --button-text: #FFFFFF;
-    
+
     --shadow-soft: 0 14px 40px rgba(0,0,0,0.20);
     --shadow-card: 0 20px 55px rgba(0,0,0,0.28);
 }
 
 
-
 /* ==========================================
-RESET
+   RESET
 ========================================== */
 
 * {
@@ -83,7 +92,6 @@ RESET
 
 html {
     scroll-behavior: smooth;
-    --pink-soft: #E8CDD5;
     scroll-padding-top: 100px;
 }
 
@@ -1337,275 +1345,8 @@ body::before {
 }
 
 
-/* ==========================================
-   RESPONSIVE: TABLETS
-========================================== */
+/* Responsive rules are consolidated in the final section below. */
 
-@media (max-width: 950px) {
-
-    .navbar {
-        width: calc(100% - 36px);
-        padding: 0 17px;
-    }
-
-    .nav-links {
-        gap: 17px;
-    }
-
-    .about-hero {
-        padding-left: 35px;
-        padding-right: 35px;
-
-        gap: 25px;
-    }
-
-    .about-hero-content h1 {
-        font-size: 54px;
-    }
-
-    .about-brand-card {
-        width: 330px;
-        padding: 24px;
-    }
-
-    .mission-section,
-    .team-section,
-    .tech-section {
-        padding-left: 35px;
-        padding-right: 35px;
-    }
-
-    .mission-content {
-        gap: 45px;
-    }
-
-    .team-grid {
-        grid-template-columns: repeat(2,minmax(0,1fr));
-    }
-
-    .tech-grid {
-        grid-template-columns: repeat(2,minmax(0,1fr));
-    }
-
-}
-
-
-/* ==========================================
-   RESPONSIVE: MÓVILES
-========================================== */
-
-@media (max-width: 650px) {
-
-    html {
-        scroll-padding-top: 80px;
-    }
-
-    .navbar {
-        width: calc(100% - 20px);
-        height: 64px;
-
-        top: 7px;
-
-        padding: 0 12px;
-
-        border-radius: 15px;
-    }
-
-    .brand {
-        gap: 6px;
-    }
-
-    .brand-logo {
-        width: 26px;
-        height: 29px;
-
-        border-radius: 5px;
-    }
-
-    .brand-name {
-        font-size: 17px;
-    }
-
-    .nav-links {
-        display: none;
-    }
-
-    .nav-button {
-        padding: 9px 12px;
-        font-size: 10px;
-    }
-
-
-    /* Hero */
-
-    .about-hero {
-        min-height: auto;
-
-        display: flex;
-        flex-direction: column;
-
-        gap: 20px;
-
-        padding: 140px 23px 95px;
-
-        text-align: center;
-    }
-
-    .about-hero-content h1 {
-        font-size: clamp(39px,10vw,52px);
-    }
-
-    .about-hero-content > p {
-        margin: 19px auto 0;
-
-        font-size: 13px;
-    }
-
-    .about-meta {
-        justify-content: center;
-
-        margin-top: 30px;
-
-        font-size: 9px;
-    }
-
-    .about-hero-visual {
-        width: 100%;
-        min-height: 460px;
-    }
-
-    .about-brand-card {
-        width: min(100%,350px);
-        padding: 23px;
-    }
-
-    .about-wordmark {
-        font-size: 67px;
-    }
-
-    .orbit-one {
-        width: 320px;
-        height: 320px;
-    }
-
-    .orbit-two {
-        width: 370px;
-        height: 370px;
-    }
-
-    .about-scroll {
-        bottom: 20px;
-    }
-
-
-    /* Misión */
-
-    .mission-section,
-    .team-section,
-    .tech-section {
-        padding: 90px 22px;
-    }
-
-    .mission-heading h2 {
-        font-size: 36px;
-    }
-
-    .mission-content {
-        grid-template-columns: 1fr;
-        gap: 35px;
-
-        margin-top: 45px;
-    }
-
-    .mission-description {
-        padding: 23px;
-    }
-
-    .mission-description p {
-        font-size: 14px;
-    }
-
-
-    /* Equipo */
-
-    .section-heading {
-        margin-bottom: 40px;
-    }
-
-    .section-heading h2 {
-        font-size: 38px;
-    }
-
-    .team-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .team-card {
-        min-height: 235px;
-    }
-
-
-    /* Tecnologías */
-
-    .tech-grid {
-        grid-template-columns: 1fr;
-        gap: 11px;
-    }
-
-    .tech-card {
-        min-height: 155px;
-    }
-
-
-    /* Cierre */
-
-    .about-closing {
-        min-height: 440px;
-        padding: 85px 23px;
-    }
-
-    .about-closing-content h2 {
-        font-size: 39px;
-    }
-
-
-    /* Footer */
-
-    .footer {
-        flex-direction: column;
-        justify-content: center;
-
-        padding: 28px 20px;
-
-        text-align: center;
-    }
-
-}
-
-
-/* ==========================================
-   ACCESIBILIDAD
-========================================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-
-    .reveal {
-        opacity: 1;
-        transform: none;
-    }
-
-}
 
 /* ==========================================
    PAE | ABOUT PAGE THEME
@@ -1924,171 +1665,64 @@ h1, h2, h3, h4, .brand-name {
 }
 
 
-/* RESPONSIVE */
+/* =========================================================
+   RESPONSIVE V2
+   Navegación fluida y composición adaptada por dispositivo.
+========================================================= */
 
-@media (max-width: 850px) {
+@media (max-width: 950px) {
     .navbar {
-        grid-template-columns: 1fr max-content;
         width: calc(100% - 28px);
-    }
-
-    .nav-links {
-        display: none;
-    }
-}
-
-@media (max-width: 600px) {
-    .navbar {
-        width: calc(100% - 18px);
-        min-height: 64px;
-        padding: 8px 10px;
-    }
-
-    .brand-logo {
-        width: 27px;
-        height: 30px;
-    }
-
-    .brand-name {
-        font-size: 17px;
-    }
-
-    .nav-about {
-        font-size: 0;
-        width: 37px;
-        height: 37px;
-        padding: 0;
-    }
-
-    .nav-about span {
-        font-size: 16px;
-    }
-
-    .theme-toggle {
-        width: 37px;
-        height: 37px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-        animation-duration: .01ms !important;
-    }
-}
-/* ==========================================
-   PAE | THEME TOGGLE
-========================================== */
-
-.theme-toggle {
-    width: 40px;
-    height: 40px;
-
-    flex-shrink: 0;
-
-    display: grid;
-    place-items: center;
-
-    border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 50%;
-
-    background: rgba(255,255,255,0.08);
-    color: #F7F0E8;
-
-    font-size: 20px;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.3s ease,
-        background 0.3s ease,
-        border-color 0.3s ease;
-}
-
-.theme-toggle:hover {
-    transform: rotate(-12deg);
-    background: rgba(255,255,255,0.18);
-    border-color: rgba(255,255,255,0.5);
-}
-
-/* Mostrar luna en modo claro */
-:root[data-theme="light"] .sun-icon {
-    display: none;
-}
-
-/* Mostrar sol en modo oscuro */
-:root[data-theme="dark"] .moon-icon {
-    display: none;
-}
-/* ==========================================================
-   PAE | ABOUT PAGE RESPONSIVE REFINEMENT
-========================================================== */
-
-:root {
-    --max-width: 1480px;
-}
-
-/* ESCRITORIO */
-
-@media (min-width: 1101px) {
-
-    .about-hero,
-    .mission-section,
-    .team-section,
-    .tech-section {
-        width: min(100%, 1480px);
-        margin-inline: auto;
-    }
-
-    .about-closing-content {
-        width: min(100%, 900px);
-        margin-inline: auto;
+        padding-inline: 14px;
     }
 
     .about-hero {
-        grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
-        gap: clamp(55px, 6vw, 100px);
-        padding-left: clamp(48px, 5vw, 82px);
-        padding-right: clamp(48px, 5vw, 82px);
+        gap: 30px;
+        padding-inline: 34px;
+    }
+
+    .about-hero-content h1 {
+        font-size: clamp(42px, 6vw, 58px);
+    }
+
+    .about-brand-card {
+        width: min(100%, 340px);
+        padding: 24px;
     }
 
     .mission-section,
     .team-section,
     .tech-section {
-        padding-left: clamp(48px, 5vw, 82px);
-        padding-right: clamp(48px, 5vw, 82px);
+        padding-inline: 34px;
     }
 
-    .team-grid,
-    .tech-grid {
-        gap: clamp(16px, 2vw, 26px);
+    .mission-content {
+        gap: 42px;
     }
 }
 
-/* TABLETAS */
-
-@media (min-width: 651px) and (max-width: 850px) {
-
+/* Tabletas y teléfonos */
+@media (max-width: 850px) {
     .navbar {
         display: grid;
         grid-template-columns: minmax(0, 1fr) max-content;
         grid-template-rows: auto auto;
         row-gap: 5px;
         height: auto;
-        padding: 9px 14px 7px;
+        min-height: 0;
+        padding: 9px 12px 7px;
     }
 
     .brand {
         grid-column: 1;
         grid-row: 1;
+        min-width: 0;
     }
 
     .nav-actions {
         grid-column: 2;
         grid-row: 1;
+        gap: 7px;
     }
 
     .nav-links {
@@ -2096,10 +1730,12 @@ h1, h2, h3, h4, .brand-name {
         grid-column: 1 / -1;
         grid-row: 2;
         justify-content: flex-start;
-        gap: 20px;
+        gap: 18px;
         width: 100%;
+        min-width: 0;
         overflow-x: auto;
         padding: 5px 2px 2px;
+        white-space: nowrap;
         scrollbar-width: none;
     }
 
@@ -2118,47 +1754,59 @@ h1, h2, h3, h4, .brand-name {
     }
 
     .about-hero {
-        grid-template-columns: minmax(0, 1fr) minmax(270px, 0.85fr);
-        gap: 28px;
-        padding: 150px 28px 90px;
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 22px;
+        padding: 145px 30px 80px;
+        text-align: center;
+    }
+
+    .about-hero-content {
+        width: min(100%, 760px);
+        margin-inline: auto;
     }
 
     .about-hero-content h1 {
-        font-size: clamp(42px, 6vw, 54px);
+        font-size: clamp(40px, 7vw, 58px);
+    }
+
+    .about-hero-content > p {
+        margin-inline: auto;
+        line-height: 1.8;
+    }
+
+    .about-meta {
+        justify-content: center;
     }
 
     .about-hero-visual {
-        min-height: 440px;
+        min-height: 390px;
     }
 
     .about-brand-card {
-        width: min(100%, 330px);
+        width: min(100%, 350px);
+    }
+
+    .mission-content {
+        grid-template-columns: 1fr 0.9fr;
+        gap: 24px;
     }
 }
 
-/* TELÉFONOS */
-
+/* Teléfonos */
 @media (max-width: 650px) {
-
     html {
-        scroll-padding-top: 112px;
+        scroll-padding-top: 105px;
     }
 
     .navbar {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) max-content;
-        grid-template-rows: auto auto;
-        row-gap: 4px;
         width: calc(100% - 16px);
-        height: auto;
-        min-height: 0;
         top: 7px;
         padding: 8px 10px 6px;
+        border-radius: 14px;
     }
 
     .brand {
-        grid-column: 1;
-        grid-row: 1;
         gap: 5px;
     }
 
@@ -2172,150 +1820,108 @@ h1, h2, h3, h4, .brand-name {
     }
 
     .nav-actions {
-        grid-column: 2;
-        grid-row: 1;
         gap: 5px;
     }
 
-    .nav-links {
-        display: flex;
-        grid-column: 1 / -1;
-        grid-row: 2;
-        justify-content: flex-start;
-        gap: 17px;
-        width: 100%;
-        overflow-x: auto;
-        padding: 5px 2px 2px;
-        white-space: nowrap;
-        scrollbar-width: none;
-    }
-
-    .nav-links::-webkit-scrollbar {
-        display: none;
-    }
-
-    .nav-links a {
-        flex: 0 0 auto;
-        font-size: 10px;
-    }
-
-    .navbar.is-hidden {
-        transform: translateX(-50%);
-        opacity: 1;
-        pointer-events: auto;
-    }
-
     .nav-about {
-        display: inline-flex;
-        min-height: 33px;
-        width: auto;
-        padding: 0 9px;
+        min-height: 34px;
+        padding: 8px 9px;
         font-size: 10px;
-    }
-
-    .nav-about span {
-        display: none;
     }
 
     .theme-toggle {
-        width: 33px;
-        height: 33px;
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
     }
 
-    /* HERO */
-
     .about-hero {
-        min-height: auto;
-        gap: 12px;
-        padding: 138px 20px 66px;
+        gap: 10px;
+        padding: 135px 20px 65px;
     }
 
     .about-hero-content h1 {
         margin-top: 18px;
-        font-size: clamp(37px, 9.5vw, 48px);
+        font-size: clamp(36px, 9.5vw, 48px);
         line-height: 1.08;
     }
 
     .about-hero-content > p {
-        max-width: 36rem;
+        margin-top: 18px;
         font-size: 14px;
         line-height: 1.75;
     }
 
     .about-meta {
+        flex-wrap: wrap;
         margin-top: 22px;
         font-size: 9px;
     }
 
     .about-hero-visual {
-        min-height: 350px;
+        width: 100%;
+        min-height: 330px;
         height: auto;
         perspective: none;
     }
 
     .about-brand-card {
-        width: min(100%, 330px);
-        padding: 21px;
-        animation: none !important;
+        width: min(100%, 320px);
+        padding: 20px;
+        animation: none;
     }
 
     .about-emblems {
-        margin-top: 25px;
-        gap: 13px;
+        gap: 12px;
+        margin-top: 24px;
     }
 
     .about-emblem {
-        width: 64px;
-        height: 64px;
+        width: 62px;
+        height: 62px;
     }
 
     .about-wordmark {
         margin-top: 22px;
-        font-size: 64px;
+        font-size: 62px;
     }
 
     .about-card-bottom {
-        margin-top: 24px;
+        margin-top: 22px;
     }
 
     .about-orbit.orbit-one {
-        width: 300px;
-        height: 300px;
+        width: 280px;
+        height: 280px;
     }
 
     .about-orbit.orbit-two {
-        width: 330px;
-        height: 330px;
+        width: 315px;
+        height: 315px;
     }
 
     .about-visual-glow {
-        width: 260px;
-        height: 260px;
+        width: 250px;
+        height: 250px;
         filter: blur(65px);
     }
 
     .about-scroll {
-        bottom: 12px;
+        bottom: 8px;
+        font-size: 9px;
     }
-
-    .about-scroll span,
-    .about-scroll span::after {
-        animation: none !important;
-    }
-
-    /* MISIÓN */
 
     .mission-section,
     .team-section,
     .tech-section {
         width: 100%;
-        padding: 70px 20px;
+        padding: 68px 20px;
     }
 
     .mission-heading h2,
     .section-heading h2 {
-        font-size: clamp(30px, 8vw, 37px);
-        line-height: 1.13;
+        font-size: clamp(30px, 8vw, 38px);
+        line-height: 1.14;
     }
 
     .mission-content {
@@ -2333,8 +1939,6 @@ h1, h2, h3, h4, .brand-name {
         line-height: 1.75;
     }
 
-    /* EQUIPO Y TECNOLOGÍAS */
-
     .team-grid,
     .tech-grid {
         grid-template-columns: 1fr;
@@ -2345,12 +1949,15 @@ h1, h2, h3, h4, .brand-name {
     .tech-card {
         min-height: 0;
         padding: 22px;
+        background: var(--bg-card);
+        border-color: var(--border);
+        box-shadow: var(--shadow-soft);
     }
 
     .team-card h3,
     .tech-card h3 {
-        font-size: 18px;
-        line-height: 1.3;
+        font-size: 17px;
+        line-height: 1.35;
     }
 
     .team-card p,
@@ -2359,15 +1966,18 @@ h1, h2, h3, h4, .brand-name {
         line-height: 1.7;
     }
 
-    /* CIERRE */
+    .team-card:hover,
+    .tech-card:hover {
+        transform: none;
+    }
 
     .about-closing {
-        min-height: 380px;
-        padding: 72px 20px;
+        min-height: 370px;
+        padding: 70px 20px;
     }
 
     .about-closing-content h2 {
-        font-size: clamp(33px, 8.7vw, 42px);
+        font-size: clamp(32px, 8.7vw, 42px);
         line-height: 1.12;
     }
 
@@ -2376,57 +1986,47 @@ h1, h2, h3, h4, .brand-name {
         line-height: 1.7;
     }
 
-    /* FOOTER */
-
     .footer {
-        align-items: center;
+        min-height: 0;
         flex-direction: column;
         gap: 12px;
         padding: 24px 18px;
         text-align: center;
     }
 
-    /* ANIMACIONES */
-
     .reveal,
     .reveal-left,
     .reveal-right,
     .reveal-up {
-        opacity: 0;
-        filter: none !important;
-        transform: translateY(9px) !important;
-        transition: opacity 320ms ease, transform 320ms ease;
+        filter: none;
+        transform: translateY(8px);
+        transition: opacity 300ms ease, transform 300ms ease;
     }
 
     .reveal.is-visible {
         opacity: 1;
-        transform: none !important;
+        transform: none;
     }
 }
 
-/* TELÉFONOS PEQUEÑOS */
-
+/* Pantallas pequeñas */
 @media (max-width: 380px) {
-
     .navbar {
         width: calc(100% - 12px);
         padding-inline: 8px;
     }
 
-    .nav-actions {
-        gap: 4px;
+    .nav-links {
+        gap: 13px;
     }
 
-    .nav-button {
+    .nav-about {
         padding-inline: 7px;
+        font-size: 9px;
     }
 
     .about-hero {
         padding-inline: 16px;
-    }
-
-    .about-hero-visual {
-        min-height: 330px;
     }
 
     .mission-section,
@@ -2434,12 +2034,14 @@ h1, h2, h3, h4, .brand-name {
     .tech-section {
         padding-inline: 16px;
     }
+
+    .about-brand-card {
+        padding: 18px;
+    }
 }
 
-/* ACCESIBILIDAD */
-
+/* Accesibilidad */
 @media (prefers-reduced-motion: reduce) {
-
     *,
     *::before,
     *::after {

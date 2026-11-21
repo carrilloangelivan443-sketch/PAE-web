@@ -34,6 +34,17 @@
 
     --ambient-glow: rgba(108, 31, 47, 0.035);
 
+    /* Tokens used by the layout and component rules below */
+    --rose: var(--pink);
+    --rose-pale: var(--pink-soft);
+    --ambient: var(--ambient-glow);
+    --font-display: "Manrope", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --max-width: 1360px;
+    --nav-height: 72px;
+    --nav-offset: 12px;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
     --shadow-soft:
         0 10px 35px rgba(63, 32, 38, 0.07);
 
@@ -76,6 +87,10 @@
     --button-text: #FFFFFF;
 
     --ambient-glow: rgba(121, 40, 71, 0.09);
+
+    --rose: var(--pink);
+    --rose-pale: var(--pink-soft);
+    --ambient: var(--ambient-glow);
 
     --shadow-soft:
         0 10px 35px rgba(0, 0, 0, 0.20);
@@ -977,7 +992,7 @@ html::-webkit-scrollbar-button {
 
     gap: clamp(50px, 8vw, 120px);
 
-    max-width: 1130px;
+    max-width: 1200px;
 
     margin: 0 auto;
 }
@@ -2534,11 +2549,60 @@ html::-webkit-scrollbar-button {
     }
 
     .navbar {
-        width: calc(100% - 18px);
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) max-content;
+        grid-template-rows: auto auto;
+        row-gap: 5px;
 
-        padding-inline: 10px;
+        width: calc(100% - 16px);
+        height: auto;
+        min-height: 64px;
 
+        padding: 8px 10px 6px;
         border-radius: 14px;
+    }
+
+    .brand {
+        grid-column: 1;
+        grid-row: 1;
+        min-width: 0;
+        gap: 6px;
+    }
+
+    .nav-actions {
+        grid-column: 2;
+        grid-row: 1;
+        gap: 6px;
+    }
+
+    .nav-links {
+        display: flex;
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-self: stretch;
+        justify-content: flex-start;
+        gap: 16px;
+        width: 100%;
+        min-width: 0;
+        overflow-x: auto;
+        padding: 5px 2px 2px;
+        white-space: nowrap;
+        scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-links a {
+        flex: 0 0 auto;
+        font-size: 10px;
+    }
+
+    .navbar.is-hidden {
+        transform: translateX(-50%);
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .brand {
@@ -2562,21 +2626,16 @@ html::-webkit-scrollbar-button {
         gap: 6px;
     }
 
-    .nav-about {
-        display: none;
-    }
-
+    .nav-about,
     .nav-download {
-        width: 36px;
-        min-height: 36px;
-
-        padding: 0;
-
-        font-size: 0;
+        min-height: 34px;
+        padding: 8px 9px;
+        font-size: 10px;
+        white-space: nowrap;
     }
 
-    .nav-download span {
-        font-size: 16px;
+    .nav-actions .nav-button span {
+        margin-left: 2px;
     }
 
     .theme-toggle {
@@ -2614,8 +2673,8 @@ html::-webkit-scrollbar-button {
 
     .hero h1 {
         margin-top: 20px;
-
-        font-size: clamp(39px, 10vw, 53px);
+        font-size: clamp(36px, 9.5vw, 48px);
+        line-height: 1.08;
     }
 
     .hero-description {
@@ -2656,12 +2715,11 @@ html::-webkit-scrollbar-button {
 
     .hero-visual {
         width: 100%;
-
-        min-height: 450px;
+        min-height: 390px;
     }
 
     .hero-device {
-        width: 205px;
+        width: min(195px, 54vw);
     }
 
     .visual-orbit {
@@ -2710,27 +2768,16 @@ html::-webkit-scrollbar-button {
     }
 
     .demo-visual {
-        position: sticky;
-
-        top: 67px;
-
-        z-index: 10;
+        position: relative;
+        top: auto;
+        z-index: 1;
 
         width: 100%;
-        height: 385px;
-        min-height: 385px;
+        height: auto;
+        min-height: 0;
 
-        background:
-            linear-gradient(
-                180deg,
-                var(--bg-soft) 0%,
-                color-mix(
-                    in srgb,
-                    var(--bg-soft) 90%,
-                    transparent
-                ) 78%,
-                transparent 100%
-            );
+        padding: 8px 0 18px;
+        background: transparent;
     }
 
     .demo-device {
@@ -2756,17 +2803,35 @@ html::-webkit-scrollbar-button {
     }
 
     .demo-step {
-        min-height: 285px;
-
-        padding: 34px 0;
+        min-height: 0;
+        padding: 30px 0;
+        opacity: 1;
     }
 
     .demo-step h3 {
-        font-size: 29px;
+        max-width: 100%;
+        font-size: clamp(25px, 7vw, 30px);
+        line-height: 1.16;
     }
 
     .demo-step p {
-        font-size: 12px;
+        max-width: 100%;
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .demo-step h3,
+    .demo-step p,
+    .demo-step .step-number {
+        transform: none;
+        filter: none;
+        clip-path: none;
+    }
+
+    .demo-step.has-entered .step-number,
+    .demo-step.has-entered h3,
+    .demo-step.has-entered p {
+        animation: none;
     }
 
     .step-hint {
@@ -2794,10 +2859,30 @@ html::-webkit-scrollbar-button {
         gap: 9px;
     }
 
-    .feature-card {
-        min-height: 160px;
+    .feature-card,
+    .teacher-card,
+    .teacher-option {
+        background: var(--bg-card);
+        border-color: var(--border);
+        box-shadow: var(--shadow-soft);
+    }
 
+    .feature-card {
+        min-height: 150px;
         padding: 16px 14px;
+        transform: none;
+    }
+
+    .feature-card::before,
+    .teacher-card::before,
+    .teacher-option::before {
+        display: none;
+    }
+
+    .feature-card:hover,
+    .teacher-card:hover,
+    .teacher-option:hover {
+        transform: none;
     }
 
     .feature-card h3 {
@@ -2857,12 +2942,31 @@ html::-webkit-scrollbar-button {
 
     .footer {
         flex-direction: column;
-
         justify-content: center;
-
         padding: 27px 20px;
-
         text-align: center;
+    }
+
+    /* Las entradas laterales son excesivas en pantallas táctiles. */
+    .reveal,
+    .reveal-left,
+    .reveal-right,
+    .reveal-up {
+        filter: none;
+        transform: translateY(10px);
+        transition: opacity 320ms ease, transform 320ms ease;
+    }
+
+    .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+    }
+
+    .hero-content.is-visible .title-line-first,
+    .hero-content.is-visible .title-line-second {
+        animation: mobileTitleIn 420ms ease both;
+        clip-path: none;
+        filter: none;
     }
 
 }
@@ -3826,33 +3930,6 @@ body {
 
 /* MÓVILES: CONSERVAR PROPORCIONES */
 
-@media (max-width: 600px) {
-
-    .navbar {
-        min-height: 64px;
-    }
-
-    .hero h1 {
-        font-size: clamp(37px, 9vw, 48px);
-    }
-
-    .hero-device {
-        width: 195px;
-    }
-
-    .demo-device {
-        width: 158px;
-    }
-
-    .demo-step {
-        min-height: 270px;
-    }
-
-    .role-content h2 {
-        font-size: 40px;
-    }
-
-}
 
 /* ==========================================
    PAE | HERO BUTTON REFINEMENT
@@ -4427,12 +4504,16 @@ body::after {
 
 @media (max-width: 700px) {
 
+    body::before {
+        opacity: 0.012;
+    }
+
     body::after {
         background:
             radial-gradient(
                 ellipse at center,
-                transparent 45%,
-                rgba(0, 0, 0, 0.10) 100%
+                transparent 48%,
+                rgba(0, 0, 0, 0.08) 100%
             );
     }
 
@@ -4440,8 +4521,8 @@ body::after {
         background:
             radial-gradient(
                 ellipse at center,
-                transparent 35%,
-                rgba(0, 0, 0, 0.48) 100%
+                transparent 42%,
+                rgba(0, 0, 0, 0.22) 100%
             );
     }
 
@@ -4773,81 +4854,27 @@ html.js-demo-reveal
         transform: none !important;
     }
 }
-/* ==========================================================
-   PAE | RESPONSIVE REFINEMENT
-   Ajustes para escritorio, tabletas y teléfonos.
-========================================================== */
 
-:root {
-    --font-display: "Manrope", sans-serif;
-    --font-body: "Inter", sans-serif;
-    --max-width: 1520px;
-    --nav-height: 74px;
-    --nav-offset: 14px;
-    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-
-    --rose: var(--pink);
-    --rose-pale: var(--pink-soft);
-    --ambient: var(--ambient-glow);
-}
-
-/* ==========================================================
-   ESCRITORIO
-========================================================== */
-
-@media (min-width: 1101px) {
-
-    .hero,
-    .role-section {
-        max-width: var(--max-width);
+/* Movimiento breve para los títulos en móvil. */
+@keyframes mobileTitleIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
     }
-
-    .hero {
-        padding-left: clamp(44px, 5.2vw, 88px);
-        padding-right: clamp(44px, 5.2vw, 88px);
-        gap: clamp(42px, 5vw, 88px);
-    }
-
-    .hero-content {
-        max-width: 760px;
-    }
-
-    .demo-layout {
-        width: min(100%, 1360px);
-        max-width: 1360px;
-        gap: clamp(64px, 6vw, 108px);
-    }
-
-    .role-section {
-        padding-left: clamp(44px, 5.2vw, 88px);
-        padding-right: clamp(44px, 5.2vw, 88px);
-        gap: clamp(54px, 6vw, 100px);
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-@media (min-width: 1600px) {
-
-    .hero,
-    .role-section {
-        max-width: 1600px;
-    }
-
-    .demo-layout {
-        max-width: 1420px;
-    }
-}
-
-/* ==========================================================
-   TABLETAS
-========================================================== */
-
+/* Tabletas: conservar navegación accesible sin comprimir el encabezado. */
 @media (min-width: 601px) and (max-width: 850px) {
-
     .navbar {
         display: grid;
         grid-template-columns: minmax(0, 1fr) max-content;
         grid-template-rows: auto auto;
         row-gap: 5px;
+        width: calc(100% - 28px);
         height: auto;
         padding: 9px 14px 7px;
     }
@@ -4855,171 +4882,23 @@ html.js-demo-reveal
     .brand {
         grid-column: 1;
         grid-row: 1;
+        min-width: 0;
     }
 
     .nav-actions {
         grid-column: 2;
         grid-row: 1;
+        gap: 7px;
     }
 
     .nav-links {
         display: flex;
         grid-column: 1 / -1;
         grid-row: 2;
-        justify-self: stretch;
         justify-content: flex-start;
-        gap: 22px;
+        gap: 20px;
         width: 100%;
-        overflow-x: auto;
-        padding: 5px 2px 2px;
-        scrollbar-width: none;
-    }
-
-    .nav-links::-webkit-scrollbar {
-        display: none;
-    }
-
-    .nav-links a {
-        flex: 0 0 auto;
-        font-size: 11px;
-    }
-
-    .navbar.is-hidden {
-        transform: translateX(-50%);
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    .hero {
-        display: flex;
-        min-height: auto;
-        flex-direction: column;
-        gap: 18px;
-        padding: 155px 38px 88px;
-        text-align: center;
-    }
-
-    .hero-content {
-        width: min(100%, 760px);
-        margin-inline: auto;
-    }
-
-    .hero-description {
-        margin-inline: auto;
-    }
-
-    .hero-actions,
-    .hero-note {
-        justify-content: center;
-    }
-
-    .hero-visual {
-        width: 100%;
-        min-height: 410px;
-    }
-
-    .hero-device {
-        width: 205px;
-    }
-
-    .demo-layout {
-        grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
-        gap: 34px;
-    }
-
-    .demo-visual {
-        min-height: 500px;
-    }
-
-    .demo-device {
-        width: 195px;
-    }
-}
-
-/* ==========================================================
-   TELÉFONOS
-========================================================== */
-
-@media (max-width: 600px) {
-
-    html {
-        scroll-padding-top: 112px;
-    }
-
-    .navbar {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) max-content;
-        grid-template-rows: auto auto;
-        row-gap: 4px;
-        width: calc(100% - 16px);
-        height: auto;
-        min-height: 0;
-        top: 7px;
-        padding: 8px 10px 6px;
-        border-radius: 14px;
-    }
-
-    .brand {
-        grid-column: 1;
-        grid-row: 1;
-        gap: 5px;
-    }
-
-    .brand-logo {
-        width: 25px;
-        height: 28px;
-    }
-
-    .brand-name {
-        font-size: 16px;
-    }
-
-    .nav-actions {
-        grid-column: 2;
-        grid-row: 1;
-        gap: 5px;
-    }
-
-    .nav-about {
-        display: inline-flex;
-        min-height: 33px;
-        padding: 0 8px;
-        font-size: 0;
-    }
-
-    .nav-about::before {
-        content: "Equipo";
-        font-size: 10px;
-        font-weight: 700;
-    }
-
-    .nav-about span,
-    .nav-download span {
-        display: none;
-    }
-
-    .nav-download {
-        display: inline-flex;
-        width: auto;
-        min-height: 33px;
-        padding: 0 9px;
-        font-size: 10px;
-    }
-
-    .theme-toggle {
-        width: 33px;
-        height: 33px;
-        font-size: 17px;
-    }
-
-    .nav-links {
-        display: flex;
-        grid-column: 1 / -1;
-        grid-row: 2;
-        justify-self: stretch;
-        justify-content: flex-start;
-        gap: 18px;
-        width: 100%;
+        min-width: 0;
         overflow-x: auto;
         padding: 5px 2px 2px;
         white-space: nowrap;
@@ -5032,373 +4911,11 @@ html.js-demo-reveal
 
     .nav-links a {
         flex: 0 0 auto;
-        font-size: 10px;
     }
 
     .navbar.is-hidden {
         transform: translateX(-50%);
         opacity: 1;
         pointer-events: auto;
-    }
-
-    /* HERO */
-
-    .hero {
-        min-height: auto;
-        gap: 16px;
-        padding: 145px 20px 72px;
-    }
-
-    .hero h1 {
-        font-size: clamp(36px, 9.2vw, 48px);
-        line-height: 1.08;
-        letter-spacing: -0.055em;
-    }
-
-    .hero-description {
-        max-width: 34rem;
-        font-size: 14px;
-        line-height: 1.75;
-    }
-
-    .hero-actions {
-        align-items: stretch;
-        flex-direction: column;
-        gap: 9px;
-    }
-
-    .hero-actions a {
-        width: min(100%, 340px);
-        margin-inline: auto;
-    }
-
-    .hero-note {
-        max-width: 320px;
-        margin: 20px auto 0;
-        font-size: 10px;
-        line-height: 1.5;
-    }
-
-    .hero-visual {
-        min-height: 370px;
-    }
-
-    .hero-device {
-        width: 185px;
-        animation: none;
-    }
-
-    .visual-orbit {
-        width: min(82vw, 310px);
-        filter: blur(28px);
-    }
-
-    .hero::after {
-        height: 34%;
-        opacity: 0.22;
-    }
-
-    .scroll-indicator {
-        bottom: 12px;
-    }
-
-    /* DEMOSTRACIÓN */
-
-    .demo-section {
-        padding: 72px 18px 82px;
-    }
-
-    .section-heading {
-        margin-bottom: 26px;
-    }
-
-    .section-heading h2 {
-        font-size: clamp(32px, 8.5vw, 40px);
-        line-height: 1.12;
-    }
-
-    .section-heading > p {
-        font-size: 13px;
-    }
-
-    .demo-layout {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        width: 100%;
-    }
-
-    .demo-visual {
-        position: sticky;
-        top: 106px;
-        z-index: 10;
-        width: 100%;
-        height: 350px;
-        min-height: 350px;
-        padding: 8px 0;
-        background: linear-gradient(
-            180deg,
-            var(--bg-soft) 0%,
-            color-mix(in srgb, var(--bg-soft) 92%, transparent) 82%,
-            transparent 100%
-        );
-    }
-
-    .demo-device {
-        width: 132px;
-    }
-
-    .demo-controls {
-        gap: 10px;
-        margin-top: 7px;
-    }
-
-    .screen-dot {
-        width: 9px;
-        height: 9px;
-    }
-
-    .screen-dot.is-active {
-        width: 22px;
-    }
-
-    .demo-caption {
-        min-height: 16px;
-        margin-top: 5px;
-        font-size: 9px;
-    }
-
-    .demo-step {
-        min-height: 220px;
-        padding: 27px 0;
-    }
-
-    .demo-step h3 {
-        margin-top: 13px;
-        font-size: clamp(25px, 7vw, 30px);
-    }
-
-    .demo-step p {
-        margin-top: 12px;
-        font-size: 13px;
-        line-height: 1.7;
-    }
-
-    .step-hint {
-        margin-top: 14px;
-        opacity: 0.8;
-    }
-
-    /* ESTUDIANTES Y DOCENTES */
-
-    .role-section {
-        width: 100%;
-        padding: 76px 20px;
-        gap: 28px;
-    }
-
-    .role-content h2 {
-        font-size: clamp(34px, 9vw, 42px);
-        line-height: 1.12;
-    }
-
-    .role-content > p {
-        margin-top: 16px;
-        font-size: 14px;
-        line-height: 1.75;
-    }
-
-    .role-features {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 9px;
-    }
-
-    .feature-card {
-        min-height: 148px;
-        padding: 15px 13px;
-        border-radius: 14px;
-        transform: none !important;
-    }
-
-    .feature-card h3 {
-        margin-top: 14px;
-        font-size: 12px;
-        line-height: 1.35;
-    }
-
-    .feature-card p {
-        font-size: 11px;
-        line-height: 1.55;
-    }
-
-    .teacher-card {
-        padding: 21px 16px;
-        border-radius: 18px;
-    }
-
-    .teacher-option {
-        min-height: 48px;
-        font-size: 11px;
-    }
-
-    /* CIERRE */
-
-    .closing-section {
-        min-height: 390px;
-        padding: 72px 20px;
-    }
-
-    .closing-content h2 {
-        font-size: clamp(34px, 9vw, 42px);
-    }
-
-    .closing-content > p {
-        font-size: 13px;
-        line-height: 1.7;
-    }
-
-    .footer {
-        align-items: center;
-        text-align: center;
-        padding: 24px 18px;
-    }
-
-    .footer p {
-        max-width: 42rem;
-        line-height: 1.6;
-        overflow-wrap: anywhere;
-    }
-
-    /* ANIMACIONES SIMPLIFICADAS */
-
-    .reveal,
-    .reveal-left,
-    .reveal-right,
-    .reveal-up {
-        opacity: 0;
-        filter: none !important;
-        transform: translateY(9px) !important;
-        transition: opacity 320ms ease, transform 320ms ease;
-    }
-
-    .reveal.is-visible {
-        opacity: 1;
-        transform: translateY(0) !important;
-    }
-
-    .hero-content.is-visible .title-line-first,
-    .hero-content.is-visible .title-line-second {
-        animation: mobileTitleIn 380ms ease both;
-        filter: none;
-        clip-path: none;
-    }
-
-    .hero-content.is-visible .title-line-second {
-        animation-delay: 90ms;
-    }
-
-    .demo-step:not(.has-entered) .step-number,
-    .demo-step:not(.has-entered) h3,
-    .demo-step:not(.has-entered) p {
-        opacity: 1 !important;
-        filter: none !important;
-        transform: none !important;
-        clip-path: none !important;
-    }
-
-    .demo-step h3,
-    .demo-step p,
-    .demo-step .step-number {
-        transform: none !important;
-        filter: none !important;
-        clip-path: none !important;
-        transition: none !important;
-    }
-
-    .demo-step.has-entered .step-number,
-    .demo-step.has-entered h3,
-    .demo-step.has-entered p,
-    .teacher-visual.is-visible .teacher-option,
-    .closing-content.is-visible > * {
-        animation: none !important;
-    }
-
-    .hero-device,
-    .teacher-card,
-    .about-brand-card {
-        animation: none !important;
-    }
-}
-
-/* TÍTULO MÓVIL */
-
-@keyframes mobileTitleIn {
-    from {
-        opacity: 0;
-        transform: translateY(9px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* TELÉFONOS PEQUEÑOS */
-
-@media (max-width: 380px) {
-
-    .navbar {
-        width: calc(100% - 12px);
-        padding-inline: 8px;
-    }
-
-    .nav-actions {
-        gap: 4px;
-    }
-
-    .nav-about,
-    .nav-download {
-        padding-inline: 7px;
-    }
-
-    .nav-links {
-        gap: 15px;
-    }
-
-    .hero {
-        padding-inline: 16px;
-    }
-
-    .hero h1 {
-        font-size: 35px;
-    }
-
-    .role-section {
-        padding-inline: 16px;
-    }
-
-    .role-features {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* ACCESIBILIDAD */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-        animation: none !important;
-        transition-duration: 0.01ms !important;
-    }
-
-    .reveal,
-    .reveal.is-visible {
-        opacity: 1 !important;
-        filter: none !important;
-        transform: none !important;
     }
 }

@@ -1,37 +1,57 @@
 /* =========================================================
    PAE | INTERACTION ENGINE
-   Scroll reveal · Demo · Smart header · Spotlight · Theme
-   ========================================================= */
+   Scroll reveal · Interactive demo · Smart header
+   Cursor spotlight · Shared theme
+========================================================= */
 
 (() => {
     "use strict";
 
+    /* =====================================================
+       0. CONFIGURACIÓN GENERAL
+    ===================================================== */
+
     const root = document.documentElement;
 
-    const prefersReducedMotion = window.matchMedia(
+    const reducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
-    ).matches;
+    );
+
+    const mobileViewport = window.matchMedia(
+        "(max-width: 700px)"
+    );
+
+    const finePointer = window.matchMedia(
+        "(hover: hover) and (pointer: fine)"
+    );
 
 
     /* =====================================================
        1. SCROLL REVEAL
-       Cada elemento aparece una sola vez.
+       Hace aparecer los elementos al entrar en pantalla.
     ===================================================== */
 
-    const revealElements = document.querySelectorAll(".reveal");
+    function initializeReveal() {
 
-    if (
-        prefersReducedMotion ||
-        !("IntersectionObserver" in window)
-    ) {
-        revealElements.forEach((element) => {
-            element.classList.add("is-visible");
-        });
+        const elements = document.querySelectorAll(".reveal");
 
-    } else if (revealElements.length > 0) {
+        if (!elements.length) return;
 
-        const revealObserver = new IntersectionObserver(
-            (entries, observer) => {
+        // Accesibilidad: mostrar directamente si se reducen
+        // las animaciones o no existe IntersectionObserver.
+        if (
+            reducedMotion.matches ||
+            !("IntersectionObserver" in window)
+        ) {
+            elements.forEach((element) => {
+                element.classList.add("is-visible");
+            });
+
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries, currentObserver) => {
 
                 entries.forEach((entry) => {
 
@@ -39,7 +59,8 @@
 
                     entry.target.classList.add("is-visible");
 
-                    observer.unobserve(entry.target);
+                    // Cada elemento se anima una sola vez.
+                    currentObserver.unobserve(entry.target);
                 });
             },
             {
@@ -48,220 +69,291 @@
             }
         );
 
-        revealElements.forEach((element) => {
-            revealObserver.observe(element);
+        elements.forEach((element) => {
+            observer.observe(element);
         });
     }
 
 
     /* =====================================================
-       2. INTERACTIVE APP DEMO
-       Cambia el teléfono y sincroniza las explicaciones.
+       2. DEMOSTRACIÓN INTERACTIVA
+       Sincroniza el mockup con las explicaciones.
     ===================================================== */
 
-    const demoSteps = Array.from(
-        document.querySelectorAll(".demo-step")
-    );
+    function initializeDemo() {
 
-    const demoPanels = Array.from(
-        document.querySelectorAll(".demo-panel")
-    );
+        const steps = Array.from(
+            document.querySelectorAll(".demo-step")
+        );
 
-    const demoDots = Array.from(
-        document.querySelectorAll(".screen-dot")
-    );
+        const panels = Array.from(
+            document.querySelectorAll(".demo-panel")
+        );
 
-    const demoCaption = document.querySelector(".demo-caption");
+        const dots = Array.from(
+            document.querySelectorAll(".screen-dot")
+        );
 
-    let activeScreen = -1;
-    let captionTimer = null;
+        const caption = document.querySelector(".demo-caption");
 
+        // La demostración no existe en todas las páginas.
+        if (!steps.length || !panels.length) return;
 
-    /* Cambiar la pantalla activa */
+        let activeScreen = -1;
+        let captionTimer = null;
+        let demoObserver = null;
 
-    function changeDemoScreen(index) {
+        const stepMap = new Map();
+        const panelMap = new Map();
+        const dotMap = new Map();
 
-        const validIndex =
-            Number.isInteger(index) &&
-            index >= 0 &&
-            index < demoSteps.length &&
-            index < demoPanels.length;
-
-        if (!validIndex || index === activeScreen) return;
-
-        activeScreen = index;
+        const visibleRatios = new Map();
 
 
-        /* Actualizar pantallas del teléfono */
+        /* ---------------------------------------------
+           Registrar pantallas disponibles
+        --------------------------------------------- */
 
-        demoPanels.forEach((panel, panelIndex) => {
+        steps.forEach((step, position) => {
 
-            const isActive = panelIndex === index;
+            const index = Number(step.dataset.step);
 
-            panel.classList.toggle("is-active", isActive);
+            if (Number.isInteger(index)) {
+                stepMap.set(index, step);
+                visibleRatios.set(index, 0);
+            }
+        });
 
-            panel.setAttribute(
-                "aria-hidden",
-                String(!isActive)
-            );
+        panels.forEach((panel, position) => {
+
+            const index = Number.isInteger(Number(panel.dataset.screen))
+                ? Number(panel.dataset.screen)
+                : position;
+
+            panelMap.set(index, panel);
+        });
+
+        dots.forEach((dot) => {
+
+            const index = Number(dot.dataset.jumpTo);
+
+            if (Number.isInteger(index)) {
+                dotMap.set(index, dot);
+            }
         });
 
 
-        /* Actualizar explicaciones */
+        /* ---------------------------------------------
+           Cambiar la pantalla del teléfono
+        --------------------------------------------- */
 
-        demoSteps.forEach((step, stepIndex) => {
+        function changeDemoScreen(index) {
 
-            const isActive = stepIndex === index;
+            if (!panelMap.has(index)) return;
 
-            step.classList.toggle("is-active", isActive);
+            if (index === activeScreen) return;
 
-            step.setAttribute(
-                "aria-pressed",
-                String(isActive)
-            );
-        });
+            activeScreen = index;
 
 
-        /* Actualizar indicadores */
+            // Cambiar las imágenes o pantallas del mockup.
+            panelMap.forEach((panel, panelIndex) => {
 
-        demoDots.forEach((dot) => {
+                const active = panelIndex === index;
 
-            const dotIndex = Number(dot.dataset.jumpTo);
+                panel.classList.toggle("is-active", active);
 
-            const isActive = dotIndex === index;
-
-            dot.classList.toggle("is-active", isActive);
-
-            dot.setAttribute(
-                "aria-pressed",
-                String(isActive)
-            );
-        });
-
-
-        /* Actualizar descripción bajo el teléfono */
-
-        if (demoCaption) {
-
-            window.clearTimeout(captionTimer);
-
-            demoCaption.style.opacity = "0";
-
-            captionTimer = window.setTimeout(() => {
-
-                demoCaption.textContent =
-                    demoSteps[index].dataset.caption ||
-                    "Explora el PAE";
-
-                demoCaption.style.opacity = "1";
-
-            }, prefersReducedMotion ? 0 : 160);
-        }
-    }
-
-
-    /* Desplazarse hasta una explicación */
-
-    function scrollToDemoStep(index) {
-
-        const step = demoSteps[index];
-
-        if (!step) return;
-
-        changeDemoScreen(index);
-
-        step.scrollIntoView({
-            behavior: prefersReducedMotion ? "auto" : "smooth",
-            block: "center"
-        });
-    }
-
-
-    /* Inicializar demostración */
-
-    if (demoSteps.length > 0 && demoPanels.length > 0) {
-
-        if (
-            prefersReducedMotion ||
-            !("IntersectionObserver" in window)
-        ) {
-
-            /* Sin animación: dejar todos los textos visibles */
-
-            demoSteps.forEach((step) => {
-                step.classList.add("has-entered");
+                panel.setAttribute(
+                    "aria-hidden",
+                    String(!active)
+                );
             });
 
-        } else {
 
-            /*
-             * Un único observador realiza dos tareas:
-             *
-             * 1. Revela cada texto la primera vez que aparece.
-             * 2. Mantiene sincronizado el teléfono con el scroll.
-             *
-             * La clase has-entered nunca se elimina.
-             */
+            // Actualizar el paso seleccionado.
+            stepMap.forEach((step, stepIndex) => {
 
-            const demoObserver = new IntersectionObserver(
+                const active = stepIndex === index;
+
+                step.classList.toggle("is-active", active);
+
+                step.setAttribute(
+                    "aria-pressed",
+                    String(active)
+                );
+            });
+
+
+            // Actualizar los indicadores inferiores.
+            dotMap.forEach((dot, dotIndex) => {
+
+                const active = dotIndex === index;
+
+                dot.classList.toggle("is-active", active);
+
+                dot.setAttribute(
+                    "aria-pressed",
+                    String(active)
+                );
+            });
+
+
+            // Actualizar el texto descriptivo.
+            if (caption) {
+
+                window.clearTimeout(captionTimer);
+
+                caption.style.opacity = "0";
+
+                captionTimer = window.setTimeout(() => {
+
+                    const selectedStep = stepMap.get(index);
+
+                    caption.textContent =
+                        selectedStep?.dataset.caption ||
+                        "Explora el PAE";
+
+                    caption.style.opacity = "1";
+
+                }, reducedMotion.matches ? 0 : 150);
+            }
+        }
+
+
+        /* ---------------------------------------------
+           Seleccionar paso
+
+           PC: desplaza hasta la explicación.
+           Móvil: cambia la pantalla sin desplazar.
+        --------------------------------------------- */
+
+        function selectDemoStep(index) {
+
+            const step = stepMap.get(index);
+
+            if (!step || !panelMap.has(index)) return;
+
+            changeDemoScreen(index);
+
+            // En móvil no queremos saltos automáticos.
+            if (mobileViewport.matches) return;
+
+            step.scrollIntoView({
+                behavior: reducedMotion.matches ? "auto" : "smooth",
+                block: "center"
+            });
+        }
+
+
+        /* ---------------------------------------------
+           Controlar la sincronización mediante scroll
+        --------------------------------------------- */
+
+        function destroyDemoObserver() {
+
+            if (!demoObserver) return;
+
+            demoObserver.disconnect();
+            demoObserver = null;
+        }
+
+
+        function initializeDemoObserver() {
+
+            destroyDemoObserver();
+
+            // En móvil todas las explicaciones permanecen visibles.
+            // El usuario cambia la pantalla mediante los indicadores
+            // o tocando una explicación.
+            if (mobileViewport.matches) {
+
+                steps.forEach((step) => {
+                    step.classList.add("has-entered");
+                });
+
+                return;
+            }
+
+            // Sin IntersectionObserver, dejar los pasos visibles.
+            if (!("IntersectionObserver" in window)) {
+
+                steps.forEach((step) => {
+                    step.classList.add("has-entered");
+                });
+
+                return;
+            }
+
+
+            visibleRatios.clear();
+
+            steps.forEach((step) => {
+                visibleRatios.set(Number(step.dataset.step), 0);
+            });
+
+
+            demoObserver = new IntersectionObserver(
                 (entries) => {
-
-                    /* Revelar cada explicación una sola vez */
 
                     entries.forEach((entry) => {
 
-                        if (!entry.isIntersecting) return;
+                        const index = Number(entry.target.dataset.step);
 
-                        entry.target.classList.add("has-entered");
+                        if (!Number.isInteger(index)) return;
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add("has-entered");
+
+                            visibleRatios.set(
+                                index,
+                                entry.intersectionRatio
+                            );
+
+                        } else {
+
+                            visibleRatios.set(index, 0);
+                        }
                     });
 
 
-                    /* Sincronizar la pantalla del teléfono */
+                    // Elegir el paso con mayor visibilidad.
+                    const mostVisible = [...visibleRatios.entries()]
+                        .filter(([, ratio]) => ratio > 0)
+                        .sort((a, b) => b[1] - a[1])[0];
 
-                    const visibleEntries = entries
-                        .filter((entry) => entry.isIntersecting)
-                        .sort(
-                            (a, b) =>
-                                b.intersectionRatio -
-                                a.intersectionRatio
-                        );
-
-                    if (visibleEntries.length === 0) return;
-
-                    const nextIndex = Number(
-                        visibleEntries[0].target.dataset.step
-                    );
-
-                    if (Number.isInteger(nextIndex)) {
-                        changeDemoScreen(nextIndex);
+                    if (mostVisible) {
+                        changeDemoScreen(mostVisible[0]);
                     }
                 },
                 {
-                    threshold: [0.25, 0.4, 0.55, 0.7],
-                    rootMargin: "-18% 0px -18% 0px"
+                    threshold: [0.15, 0.3, 0.45, 0.6, 0.75],
+                    rootMargin: "-15% 0px -15% 0px"
                 }
             );
 
-            demoSteps.forEach((step) => {
+            steps.forEach((step) => {
                 demoObserver.observe(step);
             });
         }
 
 
-        /* Seleccionar explicación con clic o teclado */
+        /* ---------------------------------------------
+           Eventos de los pasos
+        --------------------------------------------- */
 
-        demoSteps.forEach((step) => {
+        steps.forEach((step) => {
 
-            const selectStep = () => {
+            const select = () => {
 
                 const index = Number(step.dataset.step);
 
                 if (Number.isInteger(index)) {
-                    scrollToDemoStep(index);
+                    selectDemoStep(index);
                 }
             };
 
-            step.addEventListener("click", selectStep);
+            step.addEventListener("click", select);
 
             step.addEventListener("keydown", (event) => {
 
@@ -274,49 +366,74 @@
 
                 event.preventDefault();
 
-                selectStep();
+                select();
             });
         });
 
 
-        /* Seleccionar pantalla mediante indicadores */
+        /* ---------------------------------------------
+           Eventos de los indicadores del teléfono
+        --------------------------------------------- */
 
-        demoDots.forEach((dot) => {
+        dots.forEach((dot) => {
 
             dot.addEventListener("click", () => {
 
                 const index = Number(dot.dataset.jumpTo);
 
                 if (Number.isInteger(index)) {
-                    scrollToDemoStep(index);
+                    selectDemoStep(index);
                 }
             });
         });
 
 
-        /* Primera pantalla */
+        /* ---------------------------------------------
+           Inicialización
+        --------------------------------------------- */
 
         changeDemoScreen(0);
+
+        initializeDemoObserver();
+
+
+        // Adaptar comportamiento si cambia el tamaño
+        // de la ventana o se rota el dispositivo.
+        const handleViewportChange = () => {
+            initializeDemoObserver();
+        };
+
+        if (mobileViewport.addEventListener) {
+            mobileViewport.addEventListener(
+                "change",
+                handleViewportChange
+            );
+        } else {
+            mobileViewport.addListener(handleViewportChange);
+        }
     }
 
 
     /* =====================================================
        3. SMART HEADER
-       Ocultar al bajar y mostrar al subir.
+       Oculta la navegación al bajar en PC y la muestra
+       al subir. En móviles permanece visible.
     ===================================================== */
 
-    const navbar = document.querySelector(".navbar");
+    function initializeNavbar() {
 
-    if (navbar) {
+        const navbar = document.querySelector(".navbar");
+
+        if (!navbar) return;
 
         let lastScrollY = window.scrollY;
-        let ticking = false;
+        let animationFrame = null;
 
         const scrollThreshold = 8;
         const topThreshold = 80;
 
 
-        const updateNavbar = () => {
+        function updateNavbar() {
 
             const currentScrollY = Math.max(
                 0,
@@ -326,269 +443,317 @@
             const delta = currentScrollY - lastScrollY;
 
 
-            if (
-                currentScrollY < topThreshold ||
-                delta < -scrollThreshold
-            ) {
+            // No ocultar el menú en pantallas pequeñas.
+            if (mobileViewport.matches) {
+
+                navbar.classList.remove("is-hidden");
+
+                lastScrollY = currentScrollY;
+                animationFrame = null;
+
+                return;
+            }
+
+
+            // Cerca del inicio, la navegación siempre aparece.
+            if (currentScrollY < topThreshold) {
 
                 navbar.classList.remove("is-hidden");
 
             } else if (delta > scrollThreshold) {
 
+                // Bajando.
                 navbar.classList.add("is-hidden");
+
+            } else if (delta < -scrollThreshold) {
+
+                // Subiendo.
+                navbar.classList.remove("is-hidden");
             }
 
 
             lastScrollY = currentScrollY;
-
-            ticking = false;
-        };
+            animationFrame = null;
+        }
 
 
         window.addEventListener(
             "scroll",
             () => {
 
-                if (ticking) return;
+                if (animationFrame !== null) return;
 
-                ticking = true;
-
-                window.requestAnimationFrame(updateNavbar);
+                animationFrame = window.requestAnimationFrame(
+                    updateNavbar
+                );
             },
             { passive: true }
         );
+
+
+        // Actualizar el menú si se rota o cambia el tamaño.
+        const handleViewportChange = () => {
+
+            navbar.classList.remove("is-hidden");
+
+            lastScrollY = window.scrollY;
+        };
+
+        if (mobileViewport.addEventListener) {
+            mobileViewport.addEventListener(
+                "change",
+                handleViewportChange
+            );
+        } else {
+            mobileViewport.addListener(handleViewportChange);
+        }
     }
 
 
     /* =====================================================
        4. CURSOR SPOTLIGHT
-       Iluminación que sigue al cursor.
+       Efecto de iluminación exclusivo para mouse.
     ===================================================== */
 
-    const spotlightTargets = document.querySelectorAll(
-        ".feature-card, .teacher-card, .teacher-option"
-    );
+    function initializeSpotlight() {
 
-    const hasFinePointer = window.matchMedia(
-        "(hover: hover) and (pointer: fine)"
-    ).matches;
+        if (reducedMotion.matches || !finePointer.matches) return;
 
+        const targets = document.querySelectorAll(
+            ".feature-card, .teacher-card, .teacher-option"
+        );
 
-    if (hasFinePointer && !prefersReducedMotion) {
+        targets.forEach((element) => {
 
-        spotlightTargets.forEach((element) => {
-
-            let frameId = 0;
-
-            let latestX = 0;
-            let latestY = 0;
+            let frameId = null;
+            let pointerX = 0;
+            let pointerY = 0;
 
 
             element.addEventListener(
                 "pointermove",
                 (event) => {
 
-                    latestX = event.clientX;
-                    latestY = event.clientY;
+                    pointerX = event.clientX;
+                    pointerY = event.clientY;
 
-                    if (frameId) return;
-
+                    if (frameId !== null) return;
 
                     frameId = window.requestAnimationFrame(() => {
 
-                        const rect =
-                            element.getBoundingClientRect();
+                        const rect = element.getBoundingClientRect();
 
-                        const x = latestX - rect.left;
-                        const y = latestY - rect.top;
+                        const x = pointerX - rect.left;
+                        const y = pointerY - rect.top;
 
+                        const relativeX =
+                            (x / Math.max(rect.width, 1)) * 100;
+
+                        const relativeY =
+                            (y / Math.max(rect.height, 1)) * 100;
 
                         element.style.setProperty(
                             "--mouse-x",
-                            `${(x / Math.max(rect.width, 1)) * 100}%`
+                            `${relativeX}%`
                         );
 
                         element.style.setProperty(
                             "--mouse-y",
-                            `${(y / Math.max(rect.height, 1)) * 100}%`
+                            `${relativeY}%`
                         );
 
-
-                        frameId = 0;
+                        frameId = null;
                     });
                 },
                 { passive: true }
             );
 
 
-            element.addEventListener(
-                "pointerleave",
-                () => {
+            element.addEventListener("pointerleave", () => {
 
-                    element.style.setProperty(
-                        "--mouse-x",
-                        "50%"
-                    );
-
-                    element.style.setProperty(
-                        "--mouse-y",
-                        "50%"
-                    );
+                if (frameId !== null) {
+                    window.cancelAnimationFrame(frameId);
+                    frameId = null;
                 }
-            );
+
+                element.style.setProperty("--mouse-x", "50%");
+                element.style.setProperty("--mouse-y", "50%");
+            });
         });
     }
 
 
     /* =====================================================
        5. SHARED THEME CONTROLLER
-       Un único controlador para las páginas del PAE.
+       Comparte la preferencia de tema entre páginas.
     ===================================================== */
 
-    const themeButton = document.querySelector(".theme-toggle");
+    function initializeTheme() {
 
-    const themeMeta = document.querySelector(
-        'meta[name="theme-color"]'
-    );
+        const themeButton = document.querySelector(".theme-toggle");
 
-
-    /* Leer tema guardado */
-
-    function readSavedTheme() {
-
-        try {
-
-            const savedTheme =
-                window.localStorage.getItem("pae-theme");
-
-            if (
-                savedTheme === "dark" ||
-                savedTheme === "light"
-            ) {
-                return savedTheme;
-            }
-
-        } catch (error) {
-
-            console.warn(
-                "PAE: No se pudo leer el tema guardado.",
-                error
-            );
-        }
-
-        return root.dataset.theme === "dark"
-            ? "dark"
-            : "light";
-    }
+        const themeMeta = document.querySelector(
+            'meta[name="theme-color"]'
+        );
 
 
-    /* Aplicar tema */
+        /* ---------------------------------------------
+           Leer preferencia guardada
+        --------------------------------------------- */
 
-    function setTheme(theme, persist = true) {
-
-        const selectedTheme =
-            theme === "dark" ? "dark" : "light";
-
-        const isDark = selectedTheme === "dark";
-
-
-        /* Cambiar tema del documento */
-
-        root.dataset.theme = selectedTheme;
-
-
-        /* Actualizar botón */
-
-        if (themeButton) {
-
-            themeButton.setAttribute(
-                "aria-label",
-                isDark
-                    ? "Cambiar a modo claro"
-                    : "Cambiar a modo oscuro"
-            );
-
-            themeButton.setAttribute(
-                "aria-pressed",
-                String(isDark)
-            );
-
-            themeButton.title = isDark
-                ? "Activar modo claro"
-                : "Activar modo oscuro";
-        }
-
-
-        /* Actualizar color del navegador */
-
-        if (themeMeta) {
-
-            themeMeta.setAttribute(
-                "content",
-                isDark
-                    ? "#0D0C0E"
-                    : "#6C1F2F"
-            );
-        }
-
-
-        /* Guardar preferencia */
-
-        if (persist) {
+        function readSavedTheme() {
 
             try {
 
-                window.localStorage.setItem(
-                    "pae-theme",
-                    selectedTheme
+                const saved = window.localStorage.getItem(
+                    "pae-theme"
                 );
+
+                if (saved === "dark" || saved === "light") {
+                    return saved;
+                }
 
             } catch (error) {
 
                 console.warn(
-                    "PAE: No se pudo guardar el tema.",
+                    "PAE: No se pudo leer la preferencia de tema.",
                     error
                 );
             }
+
+            return root.dataset.theme === "dark"
+                ? "dark"
+                : "light";
         }
-    }
 
 
-    /* Aplicar tema al cargar la página */
+        /* ---------------------------------------------
+           Aplicar tema
+        --------------------------------------------- */
 
-    setTheme(readSavedTheme(), false);
+        function setTheme(theme, persist = true) {
+
+            const selectedTheme =
+                theme === "dark" ? "dark" : "light";
+
+            const isDark = selectedTheme === "dark";
 
 
-    /* Registrar evento del botón */
+            root.dataset.theme = selectedTheme;
 
-    if (themeButton) {
 
-        themeButton.addEventListener("click", () => {
+            // Actualizar controles.
+            if (themeButton) {
 
-            const nextTheme =
-                root.dataset.theme === "dark"
-                    ? "light"
-                    : "dark";
+                themeButton.setAttribute(
+                    "aria-label",
+                    isDark
+                        ? "Cambiar a modo claro"
+                        : "Cambiar a modo oscuro"
+                );
 
-            setTheme(nextTheme, true);
+                themeButton.setAttribute(
+                    "aria-pressed",
+                    String(isDark)
+                );
+
+                themeButton.title = isDark
+                    ? "Activar modo claro"
+                    : "Activar modo oscuro";
+            }
+
+
+            // Actualizar barra de color del navegador.
+            if (themeMeta) {
+
+                themeMeta.setAttribute(
+                    "content",
+                    isDark ? "#0D0C0E" : "#6C1F2F"
+                );
+            }
+
+
+            // Guardar preferencia.
+            if (persist) {
+
+                try {
+
+                    window.localStorage.setItem(
+                        "pae-theme",
+                        selectedTheme
+                    );
+
+                } catch (error) {
+
+                    console.warn(
+                        "PAE: No se pudo guardar el tema.",
+                        error
+                    );
+                }
+            }
+        }
+
+
+        /* ---------------------------------------------
+           Inicializar tema
+        --------------------------------------------- */
+
+        setTheme(readSavedTheme(), false);
+
+
+        /* ---------------------------------------------
+           Evitar doble controlador en Acerca de
+        --------------------------------------------- */
+
+        const hasInlineAboutController =
+            themeButton?.id === "aboutThemeToggle";
+
+        if (themeButton && !hasInlineAboutController) {
+
+            themeButton.addEventListener("click", () => {
+
+                const nextTheme =
+                    root.dataset.theme === "dark"
+                        ? "light"
+                        : "dark";
+
+                setTheme(nextTheme);
+            });
+        }
+
+
+        /* ---------------------------------------------
+           Sincronizar otras pestañas
+        --------------------------------------------- */
+
+        window.addEventListener("storage", (event) => {
+
+            if (event.key !== "pae-theme") return;
+
+            if (
+                event.newValue !== "dark" &&
+                event.newValue !== "light"
+            ) {
+                return;
+            }
+
+            setTheme(event.newValue, false);
         });
     }
 
 
-    /* Sincronizar otras pestañas */
+    /* =====================================================
+       6. INICIALIZAR SISTEMA
+    ===================================================== */
 
-    window.addEventListener("storage", (event) => {
+    initializeReveal();
 
-        if (event.key !== "pae-theme") return;
+    initializeDemo();
 
-        if (
-            event.newValue !== "dark" &&
-            event.newValue !== "light"
-        ) {
-            return;
-        }
+    initializeNavbar();
 
-        setTheme(event.newValue, false);
-    });
+    initializeSpotlight();
+
+    initializeTheme();
 
 })();

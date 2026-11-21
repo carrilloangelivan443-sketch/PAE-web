@@ -15,6 +15,8 @@
     --muted: #76656A;
 
     --border: rgba(108, 31, 47, 0.14);
+    --border-strong: rgba(108, 31, 47, 0.27);
+    --ambient-glow: rgba(108, 31, 47, 0.035);
     --glass: rgba(250, 245, 239, 0.76);
 
     --header-bg: #6C1F2F;
@@ -27,7 +29,7 @@
 
     --font-display: "Manrope", sans-serif;
     --font-body: "Inter", sans-serif;
-    --max-width: 1240px;
+    --max-width: 1320px;
 }
 
 :root[data-theme="dark"] {
@@ -47,6 +49,8 @@
     --muted: #BCB5BA;
 
     --border: rgba(255, 255, 255, 0.09);
+    --border-strong: rgba(229, 162, 181, 0.25);
+    --ambient-glow: rgba(121, 40, 71, 0.09);
     --glass: rgba(255, 255, 255, 0.045);
 
     --header-bg: rgba(21, 19, 22, 0.88);
@@ -627,6 +631,23 @@ main {
         var(--bg-card);
 }
 
+.document-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.document-buttons > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    white-space: nowrap;
+}
+
 .download-cta h2 {
     max-width: 600px;
     margin: 10px 0 0;
@@ -733,23 +754,73 @@ main {
 
 @media (max-width: 650px) {
     .navbar {
-        top: 9px;
-        grid-template-columns: 1fr auto;
-        min-height: 60px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) max-content;
+        grid-template-rows: auto auto;
+        row-gap: 4px;
+        top: 7px;
+        width: calc(100% - 16px);
+        height: auto;
+        min-height: 0;
+        padding: 8px 10px 6px;
         border-radius: 15px;
     }
 
-    .nav-links {
-        display: none;
+    .brand {
+        grid-column: 1;
+        grid-row: 1;
+        min-width: 0;
+        gap: 5px;
+    }
+
+    .brand-logo {
+        width: 25px;
+        height: 28px;
+    }
+
+    .brand-name {
+        font-size: 16px;
     }
 
     .nav-actions {
-        gap: 8px;
+        grid-column: 2;
+        grid-row: 1;
+        gap: 6px;
+    }
+
+    .nav-links {
+        display: flex;
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-content: flex-start;
+        gap: 16px;
+        width: 100%;
+        min-width: 0;
+        overflow-x: auto;
+        padding: 5px 2px 2px;
+        white-space: nowrap;
+        scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-links a {
+        flex: 0 0 auto;
+        font-size: 10px;
+    }
+
+    .navbar.is-hidden {
+        transform: translateX(-50%);
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .nav-button {
-        padding: 9px 11px;
-        font-size: 11px;
+        min-height: 34px;
+        padding: 8px 10px;
+        font-size: 10px;
     }
 
     .theme-toggle {
@@ -815,17 +886,29 @@ main {
     .option-card,
     .option-card:last-child {
         grid-column: auto;
-        min-height: 290px;
+        min-height: 0;
+        padding: 22px;
     }
 
     .download-cta {
-        align-items: flex-start;
+        align-items: stretch;
         flex-direction: column;
+        gap: 20px;
         margin: 0 0 70px;
     }
 
-    .download-cta .button-primary {
+    .document-buttons {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
         width: 100%;
+        gap: 10px;
+    }
+
+    .document-buttons > a {
+        width: 100%;
+        min-height: 50px;
+        white-space: normal;
+        text-align: center;
     }
 
     .footer {
@@ -852,343 +935,9 @@ main {
         font-size: 64px;
     }
 }
-/* ==========================================================
-   PAE | DOWNLOAD PAGE RESPONSIVE REFINEMENT
-========================================================== */
 
-:root {
-    --max-width: 1480px;
-}
-
-main {
-    width: min(calc(100% - clamp(32px, 5vw, 96px)), 1480px);
-    max-width: 1480px;
-}
-
-/* ESCRITORIO */
-
-@media (min-width: 1101px) {
-
-    .download-hero {
-        min-height: min(760px, 88svh);
-        grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
-        gap: clamp(48px, 6vw, 100px);
-        padding: 145px clamp(28px, 4vw, 68px) 100px;
-    }
-
-    .hero-content {
-        max-width: 720px;
-    }
-
-    .download-card {
-        width: min(100%, 440px);
-    }
-
-    .options-section {
-        padding-inline: clamp(12px, 2vw, 34px);
-    }
-
-    .download-grid {
-        gap: clamp(18px, 2vw, 28px);
-    }
-}
-
-/* TABLETAS */
-
-@media (min-width: 651px) and (max-width: 900px) {
-
-    .navbar {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) max-content;
-        grid-template-rows: auto auto;
-        row-gap: 5px;
-        height: auto;
-        padding: 9px 14px 7px;
-    }
-
-    .brand {
-        grid-column: 1;
-        grid-row: 1;
-    }
-
-    .nav-actions {
-        grid-column: 2;
-        grid-row: 1;
-    }
-
-    .nav-links {
-        display: flex;
-        grid-column: 1 / -1;
-        grid-row: 2;
-        justify-content: flex-start;
-        gap: 20px;
-        width: 100%;
-        overflow-x: auto;
-        padding: 5px 2px 2px;
-        scrollbar-width: none;
-    }
-
-    .nav-links::-webkit-scrollbar {
-        display: none;
-    }
-
-    .nav-links a {
-        flex: 0 0 auto;
-    }
-
-    .navbar.is-hidden {
-        transform: translateX(-50%);
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    .download-hero {
-        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.85fr);
-        gap: 28px;
-        padding-inline: 2%;
-    }
-}
-
-/* TELÉFONOS */
-
-@media (max-width: 650px) {
-
-    html {
-        scroll-padding-top: 112px;
-    }
-
-    .navbar {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) max-content;
-        grid-template-rows: auto auto;
-        row-gap: 4px;
-        width: calc(100% - 16px);
-        height: auto;
-        min-height: 0;
-        top: 7px;
-        padding: 8px 10px 6px;
-    }
-
-    .brand {
-        grid-column: 1;
-        grid-row: 1;
-        gap: 5px;
-    }
-
-    .brand-logo {
-        width: 25px;
-        height: 28px;
-    }
-
-    .brand-name {
-        font-size: 16px;
-    }
-
-    .nav-actions {
-        grid-column: 2;
-        grid-row: 1;
-        gap: 5px;
-    }
-
-    .nav-links {
-        display: flex;
-        grid-column: 1 / -1;
-        grid-row: 2;
-        justify-content: flex-start;
-        gap: 17px;
-        width: 100%;
-        overflow-x: auto;
-        padding: 5px 2px 2px;
-        white-space: nowrap;
-        scrollbar-width: none;
-    }
-
-    .nav-links::-webkit-scrollbar {
-        display: none;
-    }
-
-    .nav-links a {
-        flex: 0 0 auto;
-        font-size: 10px;
-    }
-
-    .navbar.is-hidden {
-        transform: translateX(-50%);
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    .nav-button {
-        min-height: 33px;
-        padding: 0 9px;
-        font-size: 10px;
-    }
-
-    .theme-toggle {
-        width: 33px;
-        height: 33px;
-    }
-
-    main {
-        width: calc(100% - 28px);
-    }
-
-    .download-hero {
-        gap: 24px;
-        padding: 140px 0 78px;
-    }
-
-    .hero-content h1 {
-        font-size: clamp(2.7rem, 12.5vw, 4rem);
-        line-height: 1.02;
-        letter-spacing: -0.065em;
-    }
-
-    .hero-description {
-        max-width: 38rem;
-        font-size: 14px;
-        line-height: 1.7;
-    }
-
-    .hero-actions {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .hero-actions a {
-        width: 100%;
-    }
-
-    .hero-visual {
-        min-height: 0;
-        padding: 14px 0 22px;
-    }
-
-    .visual-orbit {
-        width: min(78vw, 340px);
-    }
-
-    .download-card {
-        width: min(100%, 420px);
-        margin-inline: auto;
-        padding: 20px;
-    }
-
-    .app-emblems img {
-        width: 58px;
-        height: 58px;
-    }
-
-    .app-wordmark {
-        font-size: clamp(58px, 18vw, 72px);
-    }
-
-    .options-section {
-        padding: 62px 0 70px;
-    }
-
-    .section-heading {
-        margin-bottom: 28px;
-    }
-
-    .section-heading h2 {
-        font-size: clamp(30px, 8vw, 38px);
-    }
-
-    .section-heading p {
-        font-size: 13px;
-    }
-
-    .download-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .option-card,
-    .option-card:last-child {
-        min-height: 0;
-        padding: 21px;
-    }
-
-    .option-icon {
-        margin-top: 12px;
-    }
-
-    .download-cta {
-        gap: 18px;
-        margin: 8px 0 58px;
-    }
-
-    .download-cta .button-primary {
-        width: 100%;
-    }
-
-    .footer {
-        align-items: center;
-        text-align: center;
-        gap: 12px;
-    }
-
-    /* Animaciones breves y discretas */
-
-    .reveal,
-    .reveal-left,
-    .reveal-right,
-    .reveal-up {
-        opacity: 0;
-        filter: none !important;
-        transform: translateY(9px) !important;
-        transition: opacity 320ms ease, transform 320ms ease;
-    }
-
-    .reveal.is-visible {
-        opacity: 1;
-        transform: none !important;
-    }
-}
-
-/* TELÉFONOS PEQUEÑOS */
-
-@media (max-width: 380px) {
-
-    main {
-        width: calc(100% - 24px);
-    }
-
-    .navbar {
-        width: calc(100% - 12px);
-        padding-inline: 8px;
-    }
-
-    .nav-actions {
-        gap: 4px;
-    }
-
-    .nav-button {
-        padding-inline: 7px;
-    }
-
-    .hero-content h1 {
-        font-size: 42px;
-    }
-}
-
-/* ACCESIBILIDAD */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-        animation: none !important;
-        transition-duration: 0.01ms !important;
-    }
-
-    .reveal,
-    .reveal.is-visible {
-        opacity: 1 !important;
-        filter: none !important;
-        transform: none !important;
+@media (hover: none) {
+    .option-card:hover {
+        transform: none;
     }
 }
