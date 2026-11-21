@@ -1,6 +1,42 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="light">
 
+<style>
+  /* 1. Detener por completo la levitación y sombras pesadas del teléfono */
+  .hero-visual,
+  .hero-visual *,
+  .hero-device,
+  .device {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  .device {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35) !important;
+  }
+
+  /* 2. Forzar título principal en blanco (modo oscuro) y oscuro (modo claro) */
+  .hero h1,
+  .hero h1 *,
+  .hero-title,
+  .hero-title * {
+    color: var(--text) !important;
+    -webkit-text-fill-color: var(--text) !important;
+    background: none !important;
+  }
+
+  :root[data-theme="dark"] .hero h1,
+  :root[data-theme="dark"] .hero h1 *,
+  :root[data-theme="dark"] .hero-title,
+  :root[data-theme="dark"] .hero-title * {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    background: none !important;
+  }
+</style>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
