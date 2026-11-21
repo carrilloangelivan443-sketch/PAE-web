@@ -4917,3 +4917,1050 @@ html.js-demo-reveal
         clip-path: none;
     }
 }
+
+
+/* =========================================
+   PAE | DEMO VINCULADA
+========================================= */
+
+.demo-layout-linked {
+    display: block;
+    max-width: 1180px;
+    margin: auto;
+}
+
+.demo-layout-linked .demo-steps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+    padding: 0;
+}
+
+.demo-layout-linked .demo-step {
+    display: grid;
+    grid-template-columns: minmax(115px, .75fr) minmax(0, 1.25fr);
+    align-items: center;
+    gap: 22px;
+
+    min-height: 0;
+    padding: 25px;
+
+    border: 1px solid var(--border);
+    border-radius: 22px;
+
+    background: var(--bg-card);
+    opacity: 1;
+
+    transition:
+        border-color .2s ease,
+        background-color .2s ease,
+        transform .2s ease;
+}
+
+.demo-layout-linked .demo-step:hover {
+    border-color: var(--wine-light);
+    background: var(--bg-elevated);
+    transform: translateY(-3px);
+}
+
+.demo-step-media {
+    display: grid;
+    min-width: 0;
+    place-items: center;
+    padding: 8px;
+    border-radius: 16px;
+    background: rgba(150, 70, 100, .08);
+}
+
+.demo-step-device {
+    width: min(100%, 155px);
+    padding: 6px;
+
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 27px;
+
+    background: linear-gradient(
+        145deg,
+        #A49BA1,
+        #302830 45%,
+        #76616E
+    );
+
+    box-shadow: 0 12px 30px rgba(0,0,0,.18);
+}
+
+.demo-step-screen {
+    position: relative;
+    overflow: hidden;
+
+    aspect-ratio: 9 / 19.5;
+    border-radius: 21px;
+
+    background: #171517;
+}
+
+.demo-step-screen > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.demo-step-copy {
+    min-width: 0;
+}
+
+.demo-layout-linked .demo-step h3 {
+    margin: 14px 0 0;
+    font-size: clamp(22px, 2.1vw, 31px);
+    line-height: 1.16;
+    letter-spacing: -.045em;
+    transform: none;
+}
+
+.demo-layout-linked .demo-step p {
+    margin-top: 13px;
+    font-size: 13px;
+    line-height: 1.75;
+    transform: none;
+}
+
+.demo-layout-linked .step-number {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 1.6px;
+    transform: none;
+}
+
+/* =========================================
+   PANTALLAS CONCEPTUALES
+========================================= */
+
+.linked-concept {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 13px;
+
+    color: #F6EDF1;
+
+    background: linear-gradient(
+        155deg,
+        #210B18,
+        #701B3B 54%,
+        #190811
+    );
+
+    font-size: 8px;
+}
+
+.linked-concept-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.linked-live {
+    color: #F0A8C0;
+}
+
+.linked-concept-main {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 8px;
+}
+
+.linked-concept-main > span {
+    color: #E6A5BD;
+    font-size: 6px;
+    letter-spacing: 1px;
+}
+
+.linked-concept-main > strong {
+    font-size: 18px;
+    line-height: 1.1;
+}
+
+.linked-concept-main p {
+    margin: 0;
+    color: #D7C3CC;
+    font-size: 8px;
+}
+
+.linked-call-stage {
+    display: flex;
+    flex: 1;
+    min-height: 75px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 14px;
+    background: rgba(0,0,0,.16);
+}
+
+.linked-avatar {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: 50%;
+    background: #A65A78;
+    font-size: 16px;
+}
+
+.linked-concept small {
+    color: #C9AAB8;
+    font-size: 6px;
+    text-align: center;
+}
+
+.linked-call-controls {
+    color: #F2DCE5;
+    text-align: center;
+    font-size: 6px;
+}
+
+.linked-task-summary {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-radius: 9px;
+    background: rgba(255,255,255,.1);
+}
+
+.linked-task-summary small {
+    color: #E6A5BD;
+}
+
+.linked-task-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 34px;
+    padding: 6px;
+
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 8px;
+    background: rgba(255,255,255,.06);
+}
+
+.linked-task-row > b {
+    color: #E6A5BD;
+    font-size: 12px;
+}
+
+.linked-task-row > span {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.linked-task-row > span small {
+    color: #C9AAB8;
+    font-size: 6px;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 850px) {
+    .demo-layout-linked .demo-steps {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .demo-layout-linked .demo-step {
+        grid-template-columns: minmax(125px, .65fr) minmax(0, 1.35fr);
+    }
+
+    .demo-step-device {
+        width: min(100%, 175px);
+    }
+}
+
+/* =========================================
+   MÓVIL
+========================================= */
+
+@media (max-width: 600px) {
+    .demo-layout-linked .demo-steps {
+        gap: 15px;
+    }
+
+    .demo-layout-linked .demo-step {
+        grid-template-columns: 100px minmax(0, 1fr);
+        gap: 14px;
+        padding: 14px;
+        border-radius: 18px;
+    }
+
+    .demo-step-media {
+        min-height: 0;
+        padding: 0;
+    }
+
+    .demo-step-device {
+        width: 100%;
+    }
+
+    .demo-layout-linked .demo-step h3 {
+        font-size: 21px;
+    }
+
+    .demo-layout-linked .demo-step p {
+        font-size: 11px;
+        line-height: 1.65;
+    }
+}
+
+/* =========================================
+   OPTIMIZACIÓN DE RENDERIZADO
+========================================= */
+
+@media (min-width: 851px) {
+
+    html {
+        background-attachment: scroll !important;
+    }
+
+    .demo-section::before,
+    .demo-section::after,
+    .demo-glow,
+    .hero-glow,
+    .visual-orbit,
+    .role-section::before,
+    .closing-glow {
+        filter: none !important;
+    }
+
+    .navbar,
+    .feature-card,
+    .teacher-card,
+    .teacher-option {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+    }
+}
+
+/* Evitar que los antiguos revelados oculten las tarjetas */
+
+html.js-demo-reveal .demo-layout-linked .demo-step .step-number,
+html.js-demo-reveal .demo-layout-linked .demo-step h3,
+html.js-demo-reveal .demo-layout-linked .demo-step p {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    clip-path: none;
+}
+
+.demo-layout-linked .demo-step.has-entered * {
+    animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .demo-layout-linked *,
+    .demo-layout-linked *::before,
+    .demo-layout-linked *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* =========================================================
+   PAE | NUEVA DEMOSTRACIÓN VINCULADA
+   Diseño responsive y optimización visual
+========================================================= */
+
+
+/* CONTENEDOR */
+
+.demo-layout-linked {
+
+    display: block;
+
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+}
+
+
+.demo-layout-linked .demo-steps {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 30px;
+
+    padding: 0;
+
+}
+
+
+/* TARJETAS */
+
+.demo-layout-linked .demo-step {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(125px, .75fr)
+        minmax(0, 1.25fr);
+
+    align-items: center;
+
+    gap: 22px;
+
+    min-height: 0;
+
+    padding: 25px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+
+    background: var(--bg-card);
+
+    opacity: 1;
+
+    cursor: default;
+
+    transition:
+        border-color .2s ease,
+        background-color .2s ease,
+        transform .2s ease;
+
+}
+
+
+.demo-layout-linked .demo-step:hover {
+
+    border-color: var(--border-strong);
+
+    background: var(--bg-elevated);
+
+    transform: translateY(-3px);
+
+}
+
+
+/* CONTENEDOR DE IMAGEN */
+
+.demo-step-media {
+
+    display: grid;
+
+    min-width: 0;
+
+    min-height: 245px;
+
+    place-items: center;
+
+    padding: 10px;
+
+    border-radius: 17px;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(150, 70, 100, .13),
+            transparent 72%
+        );
+
+}
+
+
+/* MARCO DEL TELÉFONO */
+
+.demo-step-device {
+
+    width: min(100%, 160px);
+
+    padding: 6px;
+
+    border: 1px solid rgba(255,255,255,.35);
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #A49BA1,
+            #302830 45%,
+            #76616E
+        );
+
+    box-shadow:
+        0 14px 32px rgba(0,0,0,.18);
+
+}
+
+
+/* PANTALLA */
+
+.demo-step-screen {
+
+    position: relative;
+
+    overflow: hidden;
+
+    width: 100%;
+
+    aspect-ratio: 9 / 19.5;
+
+    border-radius: 22px;
+
+    background: #171517;
+
+}
+
+
+.demo-step-screen > img {
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+}
+
+
+/* TEXTO */
+
+.demo-step-copy {
+
+    min-width: 0;
+
+}
+
+
+.demo-layout-linked .demo-step .step-number {
+
+    display: inline-block;
+
+    color: var(--wine-light);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.6px;
+
+}
+
+
+:root[data-theme="dark"]
+.demo-layout-linked .demo-step .step-number {
+
+    color: var(--rose);
+
+}
+
+
+.demo-layout-linked .demo-step h3 {
+
+    max-width: 520px;
+
+    margin: 14px 0 0;
+
+    color: var(--text);
+
+    font-size: clamp(22px, 2.1vw, 31px);
+
+    font-weight: 750;
+
+    line-height: 1.16;
+
+    letter-spacing: -.045em;
+
+}
+
+
+.demo-layout-linked .demo-step p {
+
+    margin: 13px 0 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.75;
+
+}
+
+
+/* =========================================================
+   PANTALLAS CONCEPTUALES
+========================================================= */
+
+.linked-concept {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    padding: 13px;
+
+    color: #F6EDF1;
+
+    background:
+        linear-gradient(
+            155deg,
+            #210B18,
+            #701B3B 54%,
+            #190811
+        );
+
+    font-size: 8px;
+
+}
+
+
+.linked-concept-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 5px;
+
+}
+
+
+.linked-live {
+
+    color: #F0A8C0;
+
+}
+
+
+.linked-concept-main {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-top: 8px;
+
+}
+
+
+.linked-concept-main > span {
+
+    color: #E6A5BD;
+
+    font-size: 6px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.linked-concept-main > strong {
+
+    font-size: 18px;
+
+    line-height: 1.1;
+
+}
+
+
+.linked-concept-main p {
+
+    margin: 0;
+
+    color: #D7C3CC;
+
+    font-size: 8px;
+
+}
+
+
+/* VIDEOLLAMADA */
+
+.linked-call-stage {
+
+    display: flex;
+
+    flex: 1;
+
+    min-height: 75px;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    border: 1px solid rgba(255,255,255,.13);
+
+    border-radius: 14px;
+
+    background: rgba(0,0,0,.16);
+
+}
+
+
+.linked-avatar {
+
+    display: grid;
+
+    width: 34px;
+    height: 34px;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #A65A78;
+
+    font-size: 16px;
+
+}
+
+
+.linked-call-stage span,
+.linked-concept > small {
+
+    color: #C9AAB8;
+
+    font-size: 6px;
+
+    text-align: center;
+
+}
+
+
+.linked-call-controls {
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    color: #F2DCE5;
+
+    font-size: 6px;
+
+}
+
+
+/* TAREAS */
+
+.linked-task-summary {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 8px;
+
+    border-radius: 9px;
+
+    background: rgba(255,255,255,.10);
+
+}
+
+
+.linked-task-summary small {
+
+    color: #E6A5BD;
+
+}
+
+
+.linked-task-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    min-height: 34px;
+
+    padding: 6px;
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    border-radius: 8px;
+
+    background: rgba(255,255,255,.06);
+
+}
+
+
+.linked-task-row > b {
+
+    color: #E6A5BD;
+
+    font-size: 12px;
+
+}
+
+
+.linked-task-row > span {
+
+    display: flex;
+
+    min-width: 0;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+}
+
+
+.linked-task-row > span small {
+
+    color: #C9AAB8;
+
+    font-size: 6px;
+
+}
+
+
+/* =========================================================
+   TABLETS
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .demo-layout-linked .demo-steps {
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+
+    }
+
+
+    .demo-layout-linked .demo-step {
+
+        grid-template-columns:
+            minmax(140px, .65fr)
+            minmax(0, 1.35fr);
+
+    }
+
+
+    .demo-step-device {
+
+        width: min(100%, 175px);
+
+    }
+
+}
+
+
+/* =========================================================
+   MÓVILES
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .demo-section {
+
+        padding: 90px 16px 100px;
+
+    }
+
+
+    .demo-layout-linked .demo-steps {
+
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+
+    }
+
+
+    .demo-layout-linked .demo-step {
+
+        grid-template-columns:
+            105px
+            minmax(0, 1fr);
+
+        align-items: center;
+
+        gap: 14px;
+
+        padding: 14px;
+
+        border-radius: 18px;
+
+    }
+
+
+    .demo-step-media {
+
+        min-height: 0;
+
+        padding: 0;
+
+    }
+
+
+    .demo-step-device {
+
+        width: 100%;
+
+    }
+
+
+    .demo-layout-linked .demo-step h3 {
+
+        font-size: 21px;
+
+        line-height: 1.2;
+
+    }
+
+
+    .demo-layout-linked .demo-step p {
+
+        font-size: 11px;
+
+        line-height: 1.65;
+
+    }
+
+
+    .demo-layout-linked .demo-step .step-number {
+
+        font-size: 9px;
+
+        letter-spacing: 1px;
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDIMIENTO DE ESCRITORIO
+========================================================= */
+
+@media (min-width: 851px) {
+
+    html {
+
+        background-attachment: scroll !important;
+
+    }
+
+
+    /* Reducir desenfoques sobre superficies grandes */
+
+    .demo-section::before,
+    .demo-section::after,
+    .demo-glow,
+    .hero-glow,
+    .visual-orbit,
+    .role-section::before,
+    .closing-glow {
+
+        filter: none !important;
+
+    }
+
+
+    /* Evitar composición de blur costosa */
+
+    .navbar,
+    .feature-card,
+    .teacher-card,
+    .teacher-option {
+
+        backdrop-filter: none !important;
+
+        -webkit-backdrop-filter: none !important;
+
+    }
+
+}
+
+
+/* =========================================================
+   EVITAR QUE LAS ANTIGUAS ANIMACIONES OCULTEN EL TEXTO
+========================================================= */
+
+html.js-demo-reveal
+.demo-layout-linked .demo-step:not(.has-entered) .step-number,
+
+html.js-demo-reveal
+.demo-layout-linked .demo-step:not(.has-entered) h3,
+
+html.js-demo-reveal
+.demo-layout-linked .demo-step:not(.has-entered) p {
+
+    opacity: 1 !important;
+
+    filter: none !important;
+
+    transform: none !important;
+
+    clip-path: none !important;
+
+    animation: none !important;
+
+}
+
+
+.demo-layout-linked .demo-step .step-number,
+.demo-layout-linked .demo-step h3,
+.demo-layout-linked .demo-step p {
+
+    opacity: 1;
+
+    filter: none;
+
+    transform: none;
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .demo-layout-linked *,
+    .demo-layout-linked *::before,
+    .demo-layout-linked *::after {
+
+        animation: none !important;
+
+        transition: none !important;
+
+    }
+
+}
