@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6C1F2F">
+    <meta name="description" content="Descarga PAE, el Portal de Aprendizaje Estudiantil del CECyT 5.">
+
+    <title>Descargas | PAE</title>
+
+    <script>
+        (() => {
+            try {
+                document.documentElement.dataset.theme =
+                    localStorage.getItem("pae-theme") === "dark" ? "dark" : "light";
+            } catch (error) {
+                document.documentElement.dataset.theme = "light";
+            }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="Descargas.css">
+
+    <script src="animations.js" defer></script>
+    <script src="Descargas.js" defer></script>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="navbar">
+
+        <a href="PAE(creo).html#inicio" class="brand" aria-label="PAE, inicio">
+
+            <span class="brand-logo">
+                <img src="fotos/IPN logo.jpg" alt="Instituto Politécnico Nacional">
+            </span>
+
+            <span class="brand-logo">
+                <img src="fotos/CECYT5 logo.jpg" alt="CECyT 5">
+            </span>
+
+            <span class="brand-name">PAE</span>
+
+        </a>
+
+        <nav class="nav-links" aria-label="Navegación principal">
+            <a href="PAE(creo).html#inicio">Inicio</a>
+            <a href="PAE(creo).html#demo">La aplicación</a>
+            <a href="Acerca de.html">Sobre nosotros</a>
+        </nav>
+
+        <div class="nav-actions">
+
+            <a href="PAE(creo).html" class="nav-button nav-back">
+                Volver al PAE <span aria-hidden="true">↗</span>
+            </a>
+
+            <button class="theme-toggle"
+                    id="downloadThemeToggle"
+                    type="button"
+                    aria-label="Cambiar a modo oscuro"
+                    aria-pressed="false"
+                    title="Cambiar tema">
+
+                <span class="moon-icon" aria-hidden="true">☾</span>
+                <span class="sun-icon" aria-hidden="true">☀</span>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+        <section class="download-hero">
+
+            <div class="hero-glow" aria-hidden="true"></div>
+
+            <div class="hero-content reveal reveal-left">
+
+                <span class="eyebrow">
+                    CECyT 5 · INSTITUTO POLITÉCNICO NACIONAL
+                </span>
+
+                <h1>
+                    Tu vida académica, <br>
+                    <span>comienza aquí</span>
+                </h1>
+
+                <p class="hero-description">
+                    Consulta las opciones disponibles para conocernos,
+                    descargar y utilizar nuestra aplicación.
+                </p>
+
+                <div class="hero-actions">
+
+                    <!-- DESCARGA DIRECTA DEL APK -->
+                    <a class="button-primary"
+                       href="https://github.com/carrilloangelivan443-sketch/P-A-E/releases/tag/v0.1.0">
+
+                        Descargar PAE
+                        <span aria-hidden="true">↓</span>
+
+                    </a>
+
+                    <a class="button-secondary" href="#opciones">
+                        Ver opciones de descarga
+                    </a>
+
+                </div>
+
+                <div class="hero-note">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    Proyecto académico de Byte5
+                </div>
+
+            </div>
+
+
+            <div class="hero-visual reveal reveal-right">
+
+                <div class="visual-orbit" aria-hidden="true"></div>
+
+                <div class="download-card">
+
+                    <div class="card-topline">
+                        <span>PORTAL DE APRENDIZAJE ESTUDIANTIL</span>
+                        <span class="card-status">PAE</span>
+                    </div>
+
+                    <div class="app-emblems">
+
+                        <img src="fotos/IPN logo.jpg"
+                             alt="Instituto Politécnico Nacional">
+
+                        <img src="fotos/CECYT5 logo.jpg"
+                             alt="CECyT 5 Benito Juárez">
+
+                    </div>
+
+                    <div class="app-wordmark">PAE</div>
+
+                    <p class="app-subtitle">
+                        Tu vida académica, en una app
+                    </p>
+
+                    <div class="card-divider"></div>
+
+                    <div class="app-features">
+                        <span><b>01</b> Información escolar</span>
+                        <span><b>02</b> Herramientas para estudiantes</span>
+                        <span><b>03</b> Acceso desde un solo lugar</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <a href="#opciones" class="scroll-link">
+                <span aria-hidden="true">↓</span>
+                Explora las descargas
+            </a>
+
+        </section>
+
+
+
+        <!-- OPCIONES -->
+        <section class="options-section" id="opciones">
+
+            <div class="section-heading reveal">
+
+                <span class="eyebrow">ACCESO AL PROYECTO</span>
+
+                <h2>
+                    Descarga y conoce <span>el PAE</span>
+                </h2>
+
+                <p>
+                    Descarga la aplicación o conoce quiénes somos
+                    y cómo creamos el PAE.
+                </p>
+
+            </div>
+
+
+            <div class="download-grid">
+
+
+                <!-- APK -->
+                <article class="option-card reveal">
+
+                    <span class="option-number">01 / DESCARGA</span>
+
+                    <div class="option-icon" aria-hidden="true">⌘</div>
+
+                    <h3>Descarga el APK</h3>
+
+                    <p>
+                        Descarga la versión de prueba de PAE
+                        e instálala en tu dispositivo Android.
+                    </p>
+
+                    <a class="option-link"
+                       href="https://github.com/carrilloangelivan443-sketch/P-A-E/releases/tag/v0.1.0"
+                       target="_blank"
+                       rel="noopener noreferrer">
+
+                        Descargar aplicación
+                        <span aria-hidden="true">↓</span>
+
+                    </a>
+
+                </article>
+
+
+
+                <!-- INFORMACIÓN -->
+                <article class="option-card option-card-highlight reveal">
+
+                    <span class="option-number">02 / INFORMACIÓN</span>
+
+                    <div class="option-icon" aria-hidden="true">✳</div>
+
+                    <h3>Conoce el proyecto</h3>
+
+                    <p>
+                        Descubre quiénes somos, por qué creamos
+                        el PAE y las tecnologías que utilizamos.
+                    </p>
+
+                    <a class="option-link"
+                       href="Acerca de.html">
+
+                        Sobre nosotros
+                        <span aria-hidden="true">↗</span>
+
+                    </a>
+
+                </article>
+
+
+
+                <!-- RECORRIDO -->
+                <article class="option-card reveal">
+
+                    <span class="option-number">03 / RECORRIDO</span>
+
+                    <div class="option-icon" aria-hidden="true">◎</div>
+
+                    <h3>Inicia en la aplicación</h3>
+
+                    <p>
+                        Conoce las funciones y las ventajas
+                        de nuestra plataforma.
+                    </p>
+
+                    <a class="option-link"
+                       href="PAE(creo).html#demo">
+
+                        Página principal
+                        <span aria-hidden="true">↗</span>
+
+                    </a>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- DOCUMENTACIÓN -->
+        <section class="download-cta reveal">
+
+            <div>
+
+                <span class="eyebrow">BYTE5 · CECyT 5 · IPN</span>
+
+                <h2>Documentación del proyecto</h2>
+
+                <p>
+                    Consulta la convocatoria y documentación
+                    relacionada con nuestra plataforma.
+                </p>
+
+            </div>
+
+
+            <div class="document-buttons">
+
+                <a class="button-primary"
+                   href="Documentacion/Convocatoria.pdf"
+                   target="_blank"
+                   rel="noopener noreferrer">
+
+                    Ver documentación
+                    <span aria-hidden="true">↗</span>
+
+                </a>
+
+
+                <a class="button-secondary"
+                   href="Documentacion/Convocatoria.pdf"
+                   download="Convocatoria_PAE.pdf">
+
+                    Descargar PDF
+                    <span aria-hidden="true">↓</span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <a href="PAE(creo).html" class="footer-brand">
+            PAE <span>· Byte5</span>
+        </a>
+
+        <span>
+            CECyT 5 Benito Juárez · Instituto Politécnico Nacional
+        </span>
+
+    </footer>
+
+
+</body>
+
+</html>

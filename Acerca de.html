@@ -1,0 +1,712 @@
+
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Acerca de | PAE</title>
+
+    <meta name="theme-color" content="#6C1F2F">
+
+    <!-- Cargar el tema guardado -->
+    <script>
+        (() => {
+            try {
+                const saved = localStorage.getItem("pae-theme");
+
+                document.documentElement.dataset.theme =
+                    saved === "dark" ? "dark" : "light";
+
+            } catch (error) {
+                document.documentElement.dataset.theme = "light";
+            }
+        })();
+    </script>
+
+    <!-- Tipografías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="Acerca de.css">
+
+    <!-- Animaciones -->
+    <script src="animations.js" defer></script>
+
+</head>
+
+
+<body>
+
+    <!-- =================================
+         HEADER
+    ================================== -->
+
+    <header class="navbar">
+
+        <a href="PAE(creo).html#inicio" class="brand">
+
+            <span class="brand-logo">
+                <img src="fotos/IPN logo.jpg" alt="IPN">
+            </span>
+
+            <span class="brand-logo">
+                <img src="fotos/CECYT5 logo.jpg" alt="CECyT 5">
+            </span>
+
+            <span class="brand-name">PAE</span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="PAE(creo).html#inicio">Inicio</a>
+            <a href="#mision">Proyecto</a>
+            <a href="#equipo">Equipo</a>
+            <a href="#tecnologias">Tecnologías</a>
+
+        </nav>
+
+
+        <!-- CONTROLES DEL HEADER -->
+
+        <div class="nav-actions">
+
+            <a href="PAE(creo).html"
+               class="nav-button nav-about">
+
+                Volver al PAE <span>↗</span>
+
+            </a>
+
+
+            <!-- BOTÓN DE TEMA -->
+
+            <button
+                class="theme-toggle"
+                id="aboutThemeToggle"
+                type="button"
+                aria-label="Cambiar a modo oscuro"
+                aria-pressed="false"
+                title="Cambiar tema">
+
+                <span class="moon-icon" aria-hidden="true">☾</span>
+                <span class="sun-icon" aria-hidden="true">☀</span>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- =================================
+             01. PRESENTACIÓN
+        ================================== -->
+
+        <section class="about-hero" id="nosotros">
+
+            <div class="about-hero-glow"></div>
+
+
+            <div class="about-hero-content reveal reveal-left">
+
+                <span class="eyebrow">
+                    NUESTRO PROYECTO FUE CREADO PARA TI
+                </span>
+
+                <h1>
+                    Detrás del PAE.<br>
+                    <span>Hay un equipo</span>
+                </h1>
+
+                <p>
+                    Somos Byte5, un equipo de estudiantes
+                    del CECyT 5 Benito Juárez.
+
+                    Desarrollamos una plataforma orientada a
+                    las necesidades de nuestra comunidad,
+                    buscando facilitar el acceso a herramientas
+                    escolares y clases virtuales.
+                </p>
+
+
+                <div class="about-meta">
+
+                    <span>BYTE5</span>
+
+                    <span class="meta-divider"></span>
+
+                    <span>CECyT 5 · IPN</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- TARJETA DE PRESENTACIÓN -->
+
+            <div class="about-hero-visual reveal reveal-right">
+
+                <div class="about-visual-glow"></div>
+
+                <div class="about-orbit orbit-one"></div>
+                <div class="about-orbit orbit-two"></div>
+
+
+                <div class="about-brand-card">
+
+                    <div class="about-card-top">
+
+                        <span>PROYECTO ACADÉMICO</span>
+
+                        <span>01 / IPN</span>
+
+                    </div>
+
+
+                    <div class="about-emblems">
+
+                        <div class="about-emblem">
+
+                            <img src="fotos/IPN logo.jpg"
+                                 alt="Instituto Politécnico Nacional">
+
+                        </div>
+
+
+                        <div class="about-emblem">
+
+                            <img src="fotos/CECYT5 logo.jpg"
+                                 alt="CECyT 5 Benito Juárez">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="about-wordmark">
+                        PAE
+                    </div>
+
+
+                    <div class="about-card-divider"></div>
+
+
+                    <h2>Byte5</h2>
+
+                    <p>
+                        Portal de Acceso Estudiantil
+                    </p>
+
+
+                    <div class="about-card-bottom">
+
+                        <span>CECyT 5 · BENITO JUÁREZ</span>
+
+                        <span>↗</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <a href="#mision" class="about-scroll">
+
+                <span></span>
+
+                Conoce nuestro propósito
+
+            </a>
+
+        </section>
+
+
+        <!-- =================================
+             02. PROPÓSITO
+        ================================== -->
+
+        <section class="mission-section" id="mision">
+
+            <div class="mission-heading reveal reveal-left">
+
+                <span class="eyebrow">NUESTRO PROPÓSITO</span>
+
+                <h2>
+                    La tecnología tiene sentido<br>
+                    cuando <span>mejora tu vida</span>
+                </h2>
+
+            </div>
+
+
+            <div class="mission-content">
+
+
+                <div class="mission-description reveal reveal-right">
+
+                    <span class="mission-label">
+                        ¿CUÁL ES NUESTRO PROPÓSITO?
+                    </span>
+
+                    <p>
+                        Nuestro propósito es facilitar a alumnos
+                        y docentes del CECyT 5 el acceso a servicios
+                        escolares y clases virtuales mediante una
+                        aplicación móvil segura, rápida y fácil de usar.
+                    </p>
+
+                </div>
+
+
+                <div class="mission-values reveal reveal-up">
+
+                    <span class="mission-label">
+                        ¿QUÉ BUSCAMOS?
+                    </span>
+
+                    <div class="values-list">
+
+                        <span class="value-tag">
+                            Servicio a la comunidad
+                        </span>
+
+                        <span class="value-tag">
+                            Facilidad de uso para todos
+                        </span>
+
+                        <span class="value-tag">
+                            Accesibilidad y fiabilidad
+                        </span>
+
+                        <span class="value-tag">
+                            Trabajo en equipo
+                        </span>
+
+                        <span class="value-tag">
+                            Mejora continua en la comunidad
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             03. EQUIPO
+        ================================== -->
+
+        <section class="team-section" id="equipo">
+
+            <div class="section-heading reveal reveal-left">
+
+                <span class="eyebrow">
+                    LAS PERSONAS DETRÁS DEL PROYECTO PAE
+                </span>
+
+                <h2>
+                    Somos cuatro integrantes.<br>
+                    <span>Con un mismo objetivo.</span>
+                </h2>
+
+                <p>
+                    Brindarte la herramienta que necesitas
+                    para mejorar tu vida académica.
+                </p>
+
+            </div>
+
+
+            <div class="team-grid">
+
+
+                <article class="team-card reveal reveal-up">
+
+                    <div class="avatar-badge">LH</div>
+
+                    <span class="member-number">01</span>
+
+                    <h3>Huescas Arratia Luar Rafael</h3>
+
+                    <p>
+                        Investigación de usuario, marco teórico,
+                        retroalimentación y desarrollo web.
+                    </p>
+
+                    <span class="member-role">
+                        INVESTIGACIÓN · FRONTEND
+                    </span>
+
+                </article>
+
+
+                <article class="team-card reveal reveal-up">
+
+                    <div class="avatar-badge">GM</div>
+
+                    <span class="member-number">02</span>
+
+                    <h3>Martell López Gabriel Emiliano</h3>
+
+                    <p>
+                        Diseño de interfaces y programación
+                        del Backend.
+                    </p>
+
+                    <span class="member-role">
+                        DISEÑO · BACKEND
+                    </span>
+
+                </article>
+
+
+                <article class="team-card reveal reveal-up">
+
+                    <div class="avatar-badge">AC</div>
+
+                    <span class="member-number">03</span>
+
+                    <h3>Carrillo Andrés Ángel Iván</h3>
+
+                    <p>
+                        Diseño de arquitectura, frontend,
+                        programación y backend.
+                    </p>
+
+                    <span class="member-role">
+                        ARQUITECTURA · DESARROLLO
+                    </span>
+
+                </article>
+
+
+                <article class="team-card reveal reveal-up">
+
+                    <div class="avatar-badge">DL</div>
+
+                    <span class="member-number">04</span>
+
+                    <h3>Lasierva Millán Diego Arturo</h3>
+
+                    <p>
+                        Programación de la aplicación móvil,
+                        diseño visual y pruebas de usuario.
+                    </p>
+
+                    <span class="member-role">
+                        DESARROLLO ANDROID · DEBUGGING
+                    </span>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             04. TECNOLOGÍAS
+        ================================== -->
+
+        <section class="tech-section" id="tecnologias">
+
+            <div class="section-heading reveal reveal-left">
+
+                <span class="eyebrow">TECNOLOGÍA</span>
+
+                <h2>
+                    Construido con<br>
+                    <span>herramientas confiables y seguras.</span>
+                </h2>
+
+                <p>
+                    Las tecnologías que dan vida
+                    a nuestra plataforma.
+                </p>
+
+            </div>
+
+
+            <div class="tech-grid">
+
+
+                <article class="tech-card reveal reveal-up">
+
+                    <span class="tech-number">01</span>
+
+                    <h3>Kotlin</h3>
+
+                    <p>
+                        Lenguaje utilizado para el desarrollo
+                        de la aplicación Android.
+                    </p>
+
+                </article>
+
+
+                <article class="tech-card reveal reveal-up">
+
+                    <span class="tech-number">02</span>
+
+                    <h3>Jetpack Compose</h3>
+
+                    <p>
+                        Construcción de interfaces nativas
+                        para Android.
+                    </p>
+
+                </article>
+
+
+                <article class="tech-card reveal reveal-up">
+
+                    <span class="tech-number">03</span>
+
+                    <h3>MySQL</h3>
+
+                    <p>
+                        Sistema de gestión de bases de datos
+                        para la información escolar utilizando
+                        el sistema LAMP
+                        (Linux, Apache, MySQL y PHP).
+                    </p>
+
+                </article>
+
+
+                <article class="tech-card reveal reveal-up">
+
+                    <span class="tech-number">04</span>
+
+                    <h3>PHP</h3>
+
+                    <p>
+                        Lenguaje de programación para
+                        el desarrollo del backend.
+                    </p>
+
+                </article>
+
+
+                <article class="tech-card reveal reveal-up">
+
+                    <span class="tech-number">05</span>
+
+                    <h3>Ágora</h3>
+
+                    <p>
+                        Integración de videollamadas
+                        para las clases en línea y control
+                        durante estas.
+                    </p>
+
+                </article>
+
+
+                <article class="tech-card reveal reveal-up">
+
+                    <span class="tech-number">06</span>
+
+                    <h3>HTML · CSS · JavaScript</h3>
+
+                    <p>
+                        Desarrollo de la presentación
+                        web del proyecto.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             05. CIERRE
+        ================================== -->
+
+        <section class="about-closing">
+
+            <div class="about-closing-glow"></div>
+
+
+            <div class="about-closing-content reveal reveal-up">
+
+                <span class="eyebrow">
+                    BYTE5
+                </span>
+
+                <h2>
+                    La técnica al servicio<br>
+                    <span>de nuestra comunidad.</span>
+                </h2>
+
+                <p>
+                    El PAE es un proyecto construido
+                    por alumnos del CECyT 5
+                    y para el CECyT 5.
+                </p>
+
+                <a href="PAE(creo).html"
+                   class="button-primary">
+
+                    Volver al PAE
+
+                    <span>↗</span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =================================
+         FOOTER
+    ================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-brand">
+
+            <img src="fotos/IPN logo.jpg" alt="IPN">
+
+            <img src="fotos/CECYT5 logo.jpg" alt="CECyT 5">
+
+            <strong>PAE</strong>
+
+        </div>
+
+        <p>
+            © 2026 BYTE5 · Proyecto académico ·
+            CARRILLO ANDRÉS ÁNGEL IVÁN ·
+            HUESCAS ARRATIA LUAR RAFAEL ·
+            MARTELL LÓPEZ GABRIEL EMILIANO ·
+            LASIERVA MILLÁN DIEGO ARTURO
+        </p>
+
+        <a href="#nosotros">
+            Volver arriba ↑
+        </a>
+
+    </footer>
+
+
+    <!-- =================================
+         CONTROLADOR INDEPENDIENTE DE TEMA
+    ================================== -->
+
+    <script>
+    (() => {
+
+        const root = document.documentElement;
+
+        // ID exclusivo para esta página.
+        // Así evitamos conflictos con animations.js.
+        const button = document.getElementById("aboutThemeToggle");
+
+        const meta = document.querySelector(
+            'meta[name="theme-color"]'
+        );
+
+        if (!button) {
+            console.error("PAE: No se encontró aboutThemeToggle.");
+            return;
+        }
+
+
+        function applyTheme(theme, save = true) {
+
+            const selectedTheme =
+                theme === "dark" ? "dark" : "light";
+
+            const isDark = selectedTheme === "dark";
+
+
+            // Cambiar los colores de toda la página.
+            root.setAttribute("data-theme", selectedTheme);
+
+
+            // Actualizar el botón.
+            button.setAttribute(
+                "aria-pressed",
+                String(isDark)
+            );
+
+            button.setAttribute(
+                "aria-label",
+                isDark
+                    ? "Cambiar a modo claro"
+                    : "Cambiar a modo oscuro"
+            );
+
+            button.title = isDark
+                ? "Activar modo claro"
+                : "Activar modo oscuro";
+
+
+            // Actualizar el navegador.
+            if (meta) {
+                meta.setAttribute(
+                    "content",
+                    isDark ? "#0D0C0E" : "#6C1F2F"
+                );
+            }
+
+
+            // Compartir preferencia con la página principal.
+            if (save) {
+                try {
+                    localStorage.setItem(
+                        "pae-theme",
+                        selectedTheme
+                    );
+                } catch (error) {
+                    console.warn(
+                        "PAE: No se pudo guardar la preferencia de tema."
+                    );
+                }
+            }
+
+        }
+
+
+        // Aplicar el tema que ya se cargó en el head.
+        applyTheme(root.dataset.theme || "light", false);
+
+
+        // Único evento de este botón.
+        button.addEventListener("click", () => {
+
+            const nextTheme =
+                root.dataset.theme === "dark"
+                    ? "light"
+                    : "dark";
+
+            applyTheme(nextTheme);
+
+        });
+
+    })();
+    </script>
+
+</body>
+</html>
