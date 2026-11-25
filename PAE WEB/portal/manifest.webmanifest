@@ -1,0 +1,17 @@
+{
+  "name": "PAE · Portal de Aprendizaje Estudiantil",
+  "short_name": "PAE",
+  "description": "Clases, tareas, horario y kárdex del CECyT 5. Una herramienta para alumnos y profesores.",
+  "lang": "es-MX",
+  "start_url": "./#/inicio",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f3f4",
+  "theme_color": "#6d1f3f",
+  "icons": [
+    { "src": "iconos/icono-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "iconos/icono-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "iconos/icono-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "iconos/icono.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
