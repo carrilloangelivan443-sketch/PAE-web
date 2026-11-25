@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAE</title>
+</head>
+<body>
+    <p><a id="destino" href="PAE%20PAGINA%20WEB/PAE(creo).html">Entrar al PAE</a></p>
+    <script>
+        const destino = "PAE PAGINA WEB/PAE(creo).html" +
+            window.location.search +
+            window.location.hash;
+        document.getElementById("destino").href = destino;
+        window.location.replace(destino);
+    </script>
+</body>
+</html>
