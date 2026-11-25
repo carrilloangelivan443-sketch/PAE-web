@@ -8,7 +8,7 @@
 
 const CACHE = 'pae-web-v1';
 const ARCHIVOS = [
-  './', 'index.html', 'manifest.webmanifest', 'css/estilos.css',
+  './', 'index.html', 'GAGA.html', 'manifest.webmanifest', 'css/estilos.css',
   'js/app.js', 'js/api.js', 'js/config.js', 'js/demo.js', 'js/dom.js', 'js/horario.js', 'js/tema.js', 'js/ui.js', 'js/videollamada.js',
   'js/vistas/alumno.js', 'js/vistas/comun.js', 'js/vistas/horario.js', 'js/vistas/profesor.js',
   'iconos/icono.svg', 'iconos/icono-192.png', 'iconos/icono-512.png',
